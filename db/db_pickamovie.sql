@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 10 avr. 2021 à 15:24
+-- Généré le :  mar. 13 avr. 2021 à 00:11
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 SET
@@ -20,7 +20,7 @@ SET
 --
   -- Base de données :  `db_pickamovie`
   --
-DROP DATABASE db_pickamovie;
+  DROP DATABASE db_pickamovie;
 CREATE DATABASE IF NOT EXISTS db_pickamovie CHARACTER SET utf8 COLLATE utf8_bin;
 USE db_pickamovie;
 -- --------------------------------------------------------
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `client` (
     `emailClient` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
     PRIMARY KEY (`idClient`),
     KEY `idClient` (`idClient`)
-  ) ENGINE = InnoDB AUTO_INCREMENT = 30 DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+  ) ENGINE = InnoDB AUTO_INCREMENT = 33 DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
 --
   -- Déchargement des données de la table `client`
   --
@@ -100,6 +100,30 @@ VALUES
     'test',
     '$2y$10$vSfcrRQLxPOxDPbrcRDQv.tzisoUN0twGg8/j9vPcyXsEWwkocLGu',
     'test@emai.com'
+  ),
+  (
+    30,
+    'kurtJMH',
+    'Durieux',
+    'Valentin',
+    '$2y$10$AuXRs/IW1xaR3g9N0Z551u3mUNWjI07OhSHzj69HaVLTjgS.LlAZm',
+    'val@val.com'
+  ),
+  (
+    31,
+    'bite',
+    'durieux',
+    'valentin',
+    '$2y$10$Ozk/KkOwNa/yRUbCFaqF4.hK043iyp3vOhcge1wE5/s/1PW/y85Ge',
+    'a@test.com'
+  ),
+  (
+    32,
+    'Math1970',
+    'Daix',
+    'Mathilde',
+    '$2y$10$.AbU8THnMREz/0MA2gxEpOaWesOF1wsBYR30a/juFEurqdU3B0/G6',
+    'mathilde@email.com'
   );
 -- --------------------------------------------------------
   --
@@ -243,7 +267,7 @@ VALUES
     'Soul',
     'Pete Docter',
     'Les studios Pixar Animation vous propulsent depuis les rues de New York dans des dimensions cosmiques, en quête de réponses à de grandes questions existentielles.',
-    'images/posters/soul.jpg',
+    'images/posters/soul.png',
     'images/headers/soulHeader.jpg',
     'images/miniatures/Soul.jpg'
   ),
@@ -321,7 +345,44 @@ CREATE TABLE IF NOT EXISTS `review` (
     PRIMARY KEY (`idReview`),
     KEY `fk_reviewMovie` (`idMovie`),
     KEY `fk_reviewClient` (`idClient`)
-  ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+  ) ENGINE = InnoDB AUTO_INCREMENT = 4 DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+--
+  -- Déchargement des données de la table `review`
+  --
+INSERT INTO
+  `review` (
+    `idReview`,
+    `textReview`,
+    `dateReview`,
+    `noteReview`,
+    `idClient`,
+    `idMovie`
+  )
+VALUES
+  (
+    1,
+    'Ce film est génial je kiff lol',
+    '2021-04-12 21:25:00',
+    4,
+    15,
+    2
+  ),
+  (
+    2,
+    'Ce film est trop cool j\'ai passé un bon moment',
+    '2021-04-12 21:26:00',
+    5,
+    15,
+    2
+  ),
+  (
+    3,
+    'C\'est bon film sympathique!!',
+    '2021-04-12 21:27:00',
+    3,
+    15,
+    10
+  );
 -- --------------------------------------------------------
   --
   -- Structure de la table `session`
