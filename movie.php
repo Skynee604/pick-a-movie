@@ -17,8 +17,8 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
             <div class="card mt-4">
                 <div id="image">
-                    
-                </div>  
+
+                </div>
                 <div class="card-body">
                     <h3 class="card-title">
                         <div id="title">
@@ -31,36 +31,34 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                     <div id="resume">
 
                     </div>
-                    
+
                     <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                     4.0 stars!-->
-                    <select  id = "listeDate" class="form-control" style="margin-top:3px;max-width: 200px;" >
+                    <select id="listeDate" class="form-control" style="margin-top:3px;max-width: 200px;">
                     </select>
                     <script>
-                        $(document).ready(function(){
-                                $.get( "../requetes/selectDate.php", function() {},"json")
+                        $(document).ready(function () {
+                            $.get("../requetes/selectDate.php", function () { }, "json")
                                 .done(
-                                function(data) {
-                                    for(var i in data)
-                                        {$("#listeDate").append('<option value="'+data[i].idSession+'">'+data[i].dateSession+'</option>');}
-                                })
+                                    function (data) {
+                                        for (var i in data) { $("#listeDate").append('<option value="' + data[i].idSession + '">' + data[i].dateSession + '</option>'); }
+                                    })
                         });
                     </script>
-                    <select id = "listeSession" class="form-control" style="margin-top:3px;max-width: 200px;">
+                    <select id="listeSession" class="form-control" style="margin-top:3px;max-width: 200px;">
                     </select>
                     <script>
-                        $(document).ready(function(){
-                                $.get( "../requetes/selectDate.php", function() {},"json")
+                        $(document).ready(function () {
+                            $.get("../requetes/selectDate.php", function () { }, "json")
                                 .done(
-                                function(data) {
-                                    for(var i in data)
-                                        {$("#listeSession").append('<option value="'+data[i].idSession+'">'+data[i].timeSession+'</option>');}
-                                })
+                                    function (data) {
+                                        for (var i in data) { $("#listeSession").append('<option value="' + data[i].idSession + '">' + data[i].timeSession + '</option>'); }
+                                    })
                         });
                     </script>
                     <button type="button" class="btn btn-primary"
-                        style="margin-top:3px;max-width: 100px;">Réserver</button> 
-                    
+                        style="margin-top:3px;max-width: 100px;">Réserver</button>
+
                 </div>
 
 
@@ -72,7 +70,8 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
             <div class="card-header d-flex justify-content-end" style="border-bottom-color: #333333;">
                 <div class="mr-auto" style="margin-top:4px;color: white;"><strong>Avis des spectateurs</strong></div>
                 <?php if (!empty($_SESSION['auth']->nickNameClient)) : ?>
-                <button data-toggle="modal" data-target="#reviewModal" class="btn btn-success" style="margin-bottom:3px;">Laisser un avis</button>
+                <button data-toggle="modal" data-target="#reviewModal" class="btn btn-success"
+                    style="margin-bottom:3px;">Laisser un avis</button>
                 <?php else : ?>
                 <a href="#loginModal" data-toggle="modal" data-target="#loginModal">
                     <small class='text-muted'>Connectez-vous pour laisser un avis</small>
@@ -96,65 +95,179 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 <?php include "include/footer.php"; ?>
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         var idMovie = <?= $_GET['id'] ?>;
 
+        <?php if (!empty($_SESSION['auth']->idClient)) : ?>
+            var idClient = <?= $_SESSION['auth']->idClient ?>;
+        <?php endif; ?>
+
         $.ajax({
-            url:"requetes/getMovieById.php",
-            method:"GET",
-            data: {idMovie: idMovie},
-            dataType:"json",
-            success : function(movie){
+            url: "requetes/getMovieById.php",
+            method: "GET",
+            data: { idMovie: idMovie },
+            dataType: "json",
+            success: function (movie) {
                 $("<strong>" + movie[0].titleMovie + "</strong>").appendTo("#title");
                 $("<h5> Réalisé par : " + movie[0].director + "</h5>").appendTo("#realisateur");
                 $("<p class='card-text'>" + movie[0].summaryMovie + "</p>").appendTo("#resume");
-                $("<img class='card-img-top img-fluid' src='"+ movie[0].poster +"' alt='"+movie[0].titleMovie+"'>").appendTo("#image");
-                
-                
+                $("<img class='card-img-top img-fluid' src='" + movie[0].poster + "' alt='" + movie[0].titleMovie + "'>").appendTo("#image");
+
+
             }
         });
 
         $.ajax({
-            url:"requetes/getReviews.php",
-            method:"GET",
-            data: {idMovie: idMovie},
-            dataType:"json",
-            success : function(reviews){
-                
-                if(reviews == ""){
-                    $("<div><small class='text-muted'>Aucun avis</span><div>").appendTo("#reviews");
+            url: "requetes/getReviews.php",
+            method: "GET",
+            data: { idMovie: idMovie },
+            dataType: "json",
+            success: function (reviews) {
+
+                if (reviews == "") {
+                    $("<div id='empty'><small class='text-muted'>Aucun avis</span><div>").appendTo("#reviews");
                 }
 
-                for(var i in reviews){
+                for (var i in reviews) {
 
-                    star ="";
+                    star = "";
 
-                    for(var j=0 ; j< reviews[i].noteReview ; j++){
+                    for (var j = 0; j < reviews[i].noteReview; j++) {
                         star += "<span class='fas fa-star' style='color: orange;'></span>"
                     }
 
-                    for(var j=0 ; j< 5-reviews[i].noteReview ; j++ ){
-                         star += "<span class='fas fa-star' style='color: grey;'></span>"
+                    for (var j = 0; j < 5 - reviews[i].noteReview; j++) {
+                        star += "<span class='fas fa-star' style='color: grey;'></span>"
                     }
 
-                    contenu ="";
+                    contenu = "";
 
-                    contenu += "<div>"+ star + "</div>"
-                            + "<p>" + reviews[i].textReview + "</p>"
-                            + "<small class='text-muted'> Posté par " + reviews[i].nickNameClient + " le " + reviews[i].dateReview + "</small>";
+                    contenu += "<div>" + star + "</div>"
+                        + "<p>" + reviews[i].textReview + "</p>"
+                        + "<small class='text-muted'> Posté par " + reviews[i].nickNameClient + " le " + reviews[i].dateReview + "</small>";
 
                     $("<div>" + contenu + "</div><hr>").appendTo("#reviews");
 
                 }
-                
-                
+
+
             }
         });
-        
-        
+
+        /*---------------------REVIEW-------------------------------------*/
+
+        var note = 0;
+        var txtReview;
+
+        if(note == 0 || $("#newReview").val() == ""){
+            $('#postReview').prop("disabled", true);
+        }else {
+            $('#postReview').prop("disabled", false);
+        }
+
+        $('#stars li').on('mouseover', function () {
+            note = parseInt($(this).data('value'), 10); // L'étoile sur laquelle la souris est
+
+            //mets en jaune toutes les étoiles qui sont avant l'étoile sélectionnée
+            $(this).parent().children('li.star').each(function (e) {
+                if (e < note) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        }).on('mouseout', function () {
+            $(this).parent().children('li.star').each(function (e) {
+                $(this).removeClass('hover');
+            });
+        });
+
+        $('#stars li').on('click', function () {
+            note = parseInt($(this).data('value'), 10); // l'étoile sélectionnée
+            var stars = $(this).parent().children('li.star');
+
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            for (i = 0; i < note; i++) {
+                $(stars[i]).addClass('selected');
+            }
+
+            if(note == 0 || $("#newReview").val() == ""){
+                $('#postReview').prop("disabled", true);
+            }else {
+                $('#postReview').prop("disabled", false);
+            }
+
+        });
+
+        $("#newReview").on('keyup', function(){
+            if(note == 0 || $("#newReview").val() == ""){
+                $('#postReview').prop("disabled", true);
+            }else {
+                $('#postReview').prop("disabled", false);
+            }
+        });
+
+
+        $("#postReview").on("click", function (event) {
+             txtReview = $("#newReview").val();
+             $.ajax({
+                 url: "requetes/postReview.php",
+                 method: "POST",
+                 data: {
+                     idMovie: idMovie,
+                     idClient: idClient,
+                     textReview: txtReview,
+                     noteReview: note
+                 },
+                 dataType: "json",
+                 success: function (review) {
+                     $("#empty").remove();
+ 
+                     star = "";
+ 
+                     for (var i = 0; i < review[0].noteReview; i++) {
+                         star += "<span class='fas fa-star' style='color: orange;'></span>"
+                     }
+ 
+                     for (var i = 0; i < 5 - review[0].noteReview; i++) {
+                         star += "<span class='fas fa-star' style='color: grey;'></span>"
+                     }
+ 
+                     contenu = "";
+ 
+                     contenu += "<div>" + star + "</div>"
+                         + "<p>" + review[0].textReview + "</p>"
+                         + "<small class='text-muted'> Posté par " + review[0].nickNameClient + " le " + review[0].dateReview + "</small>";
+ 
+                     $("<div>" + contenu + "</div><hr>").appendTo("#reviews");
+ 
+                 }
+             });
+
+             $('#reviewModal').modal('hide');
+         });
+
+        $('#reviewModal').on('hidden.bs.modal', function () {
+            stars = $('#stars').children('li.star');
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            $(this).find('form').trigger('reset');
+
+            $('#postReview').prop("disabled", true);
+
+
+        })
+
 
     });
-    
+
     //change l'apparence de la barre de naviagation quand on scroll sur la page
     $(function () {
         $(document).scroll(function () {

@@ -8,3 +8,13 @@ from
   inner join client using(idClient)
 where
   idMovie = 2;
+insert into
+  review (
+    textReview,
+    dateReview,
+    noteReview,
+    idClient,
+    idMovie
+  )
+values
+  ('test de review', now(), '5', '15', '2');
