@@ -21,7 +21,7 @@ if(isAjax()){
     echo $result;
 
 }else {
-    echo "access denied";
+    header('location: ../.');
 }
 
 ?>

@@ -1,6 +1,11 @@
 <?php
 include("include/header.php");
 include("include/nav.php");
+
+if(!isset($_GET['id']) || empty($_GET['id'])){
+    header("Location: .");
+}
+
 ?>
 
 <!-- Page Content -->
@@ -8,7 +13,7 @@ include("include/nav.php");
 
     <div class="row">
 
-        <div class="col-lg-15">
+        <div class="col-lg-15 w-100">
 
             <div class="card mt-4">
                 <div id="image">
@@ -44,7 +49,8 @@ include("include/nav.php");
                     </select>
 
                     <button type="button" class="btn btn-primary"
-                        style="margin-top:3px;max-width: 100px;">Réserver</button>
+                        style="margin-top:3px;max-width: 100px;">Réserver</button> 
+                    
                 </div>
 
 
@@ -52,27 +58,20 @@ include("include/nav.php");
         </div>
         <!-- /.card -->
 
-        <div class="card card-outline-secondary my-4">
-            <div class="card-header">
-                Product Reviews
+        <div class="card card-outline-secondary w-100" style="margin-top:3%;">
+            <div class="card-header d-flex justify-content-end" style="border-bottom-color: #333333;">
+                <div class="mr-auto" style="margin-top:4px;color: white;"><strong>Avis des spectateurs</strong></div>
+                <?php if (!empty($_SESSION['auth']->nickNameClient)) : ?>
+                <button data-toggle="modal" data-target="#reviewModal" class="btn btn-success" style="margin-bottom:3px;">Laisser un avis</button>
+                <?php else : ?>
+                <a href="#loginModal" data-toggle="modal" data-target="#loginModal">
+                    <small class='text-muted'>Connectez-vous pour laisser un avis</small>
+                </a>
+                <?php endif ; ?>
             </div>
             <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                    similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                    Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                    similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                    Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                    similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                    Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-                <a href="#" class="btn btn-success">Leave a Review</a>
+                <div id="reviews">
+                </div>
             </div>
         </div>
         <!-- /.card -->
@@ -81,6 +80,8 @@ include("include/nav.php");
     <!-- /.col-lg-9 -->
 
 </div>
+
+<?php include "modalReview.php";?>
 <?php include "modalConnect.php";?>
 <?php include "include/footer.php"; ?>
 <script>
@@ -95,9 +96,46 @@ include("include/nav.php");
             dataType:"json",
             success : function(movie){
                 $("<strong>" + movie[0].titleMovie + "</strong>").appendTo("#title");
-                $("<h4> Réalisé par : " + movie[0].director + "</h4>").appendTo("#realisateur");
+                $("<h5> Réalisé par : " + movie[0].director + "</h5>").appendTo("#realisateur");
                 $("<p class='card-text'>" + movie[0].summaryMovie + "</p>").appendTo("#resume");
                 $("<img class='card-img-top img-fluid' src='"+ movie[0].poster +"' alt='"+movie[0].titleMovie+"'>").appendTo("#image");
+                
+                
+            }
+        });
+
+        $.ajax({
+            url:"requetes/getReviews.php",
+            method:"GET",
+            data: {idMovie: idMovie},
+            dataType:"json",
+            success : function(reviews){
+                
+                if(reviews == ""){
+                    $("<div><small class='text-muted'>Aucun avis</span><div>").appendTo("#reviews");
+                }
+
+                for(var i in reviews){
+
+                    star ="";
+
+                    for(var j=0 ; j< reviews[i].noteReview ; j++){
+                        star += "<span class='fas fa-star' style='color: orange;'></span>"
+                    }
+
+                    for(var j=0 ; j< 5-reviews[i].noteReview ; j++ ){
+                         star += "<span class='fas fa-star' style='color: grey;'></span>"
+                    }
+
+                    contenu ="";
+
+                    contenu += "<div>"+ star + "</div>"
+                            + "<p>" + reviews[i].textReview + "</p>"
+                            + "<small class='text-muted'> Posté par " + reviews[i].nickNameClient + " le " + reviews[i].dateReview + "</small>";
+
+                    $("<div>" + contenu + "</div><hr>").appendTo("#reviews");
+
+                }
                 
                 
             }

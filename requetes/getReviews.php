@@ -9,7 +9,7 @@ function isAjax() {
 if(isAjax()){
 
     // Préparation de la requête
-    $requete=$db->prepare("select * from movie where idMovie = :idMovie");
+    $requete=$db->prepare("select review.textReview, date_format(date(review.dateReview),'%d/%m/%Y') as 'dateReview',review.noteReview, client.nickNameClient from review inner join client using(idClient) where idMovie = :idMovie");
 
     $requete->bindParam(':idMovie', $_GET['idMovie']);
     $requete->execute();

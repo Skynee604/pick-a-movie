@@ -288,3 +288,7 @@ background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.871662043723739
 .card-body {
   color: white;
 }
+
+.checked {
+  color: orange;
+}
