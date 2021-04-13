@@ -42,7 +42,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                                 .done(
                                 function(data) {
                                     for(var i in data)
-                                        {$("#listeDate").append('<option value="'+data[i].idSession+'">'+data[i].dateTimeSession+'</option>');}
+                                        {$("#listeDate").append('<option value="'+data[i].idSession+'">'+data[i].dateSession+'</option>');}
                                 })
                         });
                     </script>
@@ -54,7 +54,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                                 .done(
                                 function(data) {
                                     for(var i in data)
-                                        {$("#listeSession").append('<option value="'+data[i].idSession+'">'+data[i].dateTimeSession+'</option>');}
+                                        {$("#listeSession").append('<option value="'+data[i].idSession+'">'+data[i].timeSession+'</option>');}
                                 })
                         });
                     </script>
