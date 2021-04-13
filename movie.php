@@ -34,20 +34,30 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                     
                     <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                     4.0 stars!-->
-                    <select class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
-                        <option selected="">Choisir une date</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select  id = "listeDate" class="form-control" style="margin-top:3px;max-width: 200px;" >
                     </select>
-
-                    <select class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
-                        <option selected="">Choisir séance</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <script>
+                        $(document).ready(function(){
+                                $.get( "../requetes/selectDate.php", function() {},"json")
+                                .done(
+                                function(data) {
+                                    for(var i in data)
+                                        {$("#listeDate").append('<option value="'+data[i].idSession+'">'+data[i].dateTimeSession+'</option>');}
+                                })
+                        });
+                    </script>
+                    <select id = "listeSession" class="form-control" style="margin-top:3px;max-width: 200px;">
                     </select>
-
+                    <script>
+                        $(document).ready(function(){
+                                $.get( "../requetes/selectDate.php", function() {},"json")
+                                .done(
+                                function(data) {
+                                    for(var i in data)
+                                        {$("#listeSession").append('<option value="'+data[i].idSession+'">'+data[i].dateTimeSession+'</option>');}
+                                })
+                        });
+                    </script>
                     <button type="button" class="btn btn-primary"
                         style="margin-top:3px;max-width: 100px;">Réserver</button> 
                     
