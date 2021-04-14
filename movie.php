@@ -32,8 +32,6 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
                     </div>
 
-                    <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    4.0 stars!-->
                      <select id="dateSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
                         <option selected="">Choisir une date</option>
                     </select>
@@ -147,18 +145,14 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
             dataType: "json",
             success: function (seances) {
                 for(var i in seances){
-
                     if(i>0){
                         if(seances[i].dateSession != seances[i-1].dateSession) {
                             $("<option value='"+seances[i].dateSession+"'>"+seances[i].dateSession+ "</option>").appendTo("#dateSeance");
                         }
                     }else {
                         $("<option value='"+seances[i].dateSession+"'>"+seances[i].dateSession+"</option>").appendTo("#dateSeance");
-                    }
-                    
+                    }  
                 }
-
-
             }
         });
 
@@ -172,14 +166,10 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                 dataType: "json",
                 success: function (seances) {
                     for(var i in seances){
-
                         if(seances[i].dateSession == dateSeance){
                             $("<option class='added' value='"+seances[i].timeSession+"'>"+seances[i].timeSession+ "</option>").appendTo("#heureSeance");
-                        }
-                        
+                        }  
                     }
-
-
                 }
             });    
         });
