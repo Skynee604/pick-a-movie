@@ -18,3 +18,10 @@ insert into
   )
 values
   ('test de review', now(), '5', '15', '2');
+select
+  *,
+  date_format(dateSession, '%d/%m/%Y')
+from
+  session
+where
+  idMovie = 3

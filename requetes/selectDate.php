@@ -9,8 +9,9 @@ function isAjax() {
 if(isAjax()){
 
     // Préparation de la requête
-    $requete=$db->prepare("select * from session");
+    $requete=$db->prepare("select date_format(dateSession,'%d/%m/%Y') as dateSession,timeSession,idMovie,adultPrice,childPrice,studentPrice from session where idMovie = :idMovie");
 
+    $requete->bindParam(':idMovie', $_GET['idMovie']);
     $requete->execute();
 
     $result = $requete->fetchAll(PDO::FETCH_ASSOC);

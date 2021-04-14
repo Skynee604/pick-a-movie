@@ -34,28 +34,13 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
                     <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                     4.0 stars!-->
-                    <select id="listeDate" class="form-control" style="margin-top:3px;max-width: 200px;">
+                     <select id="dateSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
+                        <option selected="">Choisir une date</option>
                     </select>
-                    <script>
-                        $(document).ready(function () {
-                            $.get("../requetes/selectDate.php", function () { }, "json")
-                                .done(
-                                    function (data) {
-                                        for (var i in data) { $("#listeDate").append('<option value="' + data[i].idSession + '">' + data[i].dateSession + '</option>'); }
-                                    })
-                        });
-                    </script>
-                    <select id="listeSession" class="form-control" style="margin-top:3px;max-width: 200px;">
+
+                    <select id="heureSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
+                        <option selected="">Choisir séance</option>
                     </select>
-                    <script>
-                        $(document).ready(function () {
-                            $.get("../requetes/selectDate.php", function () { }, "json")
-                                .done(
-                                    function (data) {
-                                        for (var i in data) { $("#listeSession").append('<option value="' + data[i].idSession + '">' + data[i].timeSession + '</option>'); }
-                                    })
-                        });
-                    </script>
                     <button type="button" class="btn btn-primary"
                         style="margin-top:3px;max-width: 100px;">Réserver</button>
 
@@ -153,6 +138,52 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
             }
         });
+
+        /*---------------------CHOIX DES SEACANCES-------------------------*/
+         $.ajax({
+            url: "requetes/selectDate.php",
+            method: "GET",
+            data: { idMovie: idMovie },
+            dataType: "json",
+            success: function (seances) {
+                for(var i in seances){
+
+                    if(i>0){
+                        if(seances[i].dateSession != seances[i-1].dateSession) {
+                            $("<option value='"+seances[i].dateSession+"'>"+seances[i].dateSession+ "</option>").appendTo("#dateSeance");
+                        }
+                    }else {
+                        $("<option value='"+seances[i].dateSession+"'>"+seances[i].dateSession+"</option>").appendTo("#dateSeance");
+                    }
+                    
+                }
+
+
+            }
+        });
+
+        $("#dateSeance").on('change', function(){
+            var dateSeance = $("#dateSeance").val();
+            $(".added").remove();
+            $.ajax({
+                url: "requetes/selectDate.php",
+                method: "GET",
+                data: { idMovie: idMovie },
+                dataType: "json",
+                success: function (seances) {
+                    for(var i in seances){
+
+                        if(seances[i].dateSession == dateSeance){
+                            $("<option class='added' value='"+seances[i].timeSession+"'>"+seances[i].timeSession+ "</option>").appendTo("#heureSeance");
+                        }
+                        
+                    }
+
+
+                }
+            });    
+        });
+
 
         /*---------------------REVIEW-------------------------------------*/
 
