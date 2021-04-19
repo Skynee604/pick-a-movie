@@ -293,6 +293,10 @@ background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.871662043723739
   color: orange;
 }
 
+#pay {
+  background-color:white;
+}
+
 /* Rating Star Widgets Style */
 .rating-stars ul {
   list-style-type:none;
@@ -306,18 +310,38 @@ background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.871662043723739
   
 }
 
-/* Idle State of the stars */
+/* Etat de base des étoiles*/
 .rating-stars ul > li.star > i.fa {
-  font-size:1.5em; /* Change the size of the stars */
-  color:#ccc; /* Color on idle state */
+  font-size:1.5em;
+  color:#ccc;
 }
 
-/* Hover state of the stars */
+/* Quand on passe sur l'étoile */
 .rating-stars ul > li.star.hover > i.fa {
   color:#FFCC36;
 }
 
-/* Selected state of the stars */
+/* Quand on sélétionne une étoile */
 .rating-stars ul > li.star.selected > i.fa {
   color:#FFCC36;
+}
+
+
+#Adulte,#Enfant {
+  max-width:50px;border-radius: 3px;
+  margin-left: 18px;
+}
+
+#Etudiant {
+  max-width:50px;border-radius: 3px;
+  margin-left: 4px;
+}
+
+#msgCo {
+  color: #cccccc;
+}
+
+#msgCo a{
+  color: #cccccc;
+
 }

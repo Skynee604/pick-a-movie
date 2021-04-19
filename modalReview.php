@@ -4,7 +4,7 @@
 
 <div class="modal fade" tabindex="-1" role="dialog" id="reviewModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.78);">
+    <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.9);">
       <div class=" modal-header">
         <h5 class="modal-title" style="color: white;"><strong>Rédiger un avis</strong></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -9,9 +9,8 @@ function isAjax() {
 if(isAjax()){
 
     // Préparation de la requête
-    $requete=$db->prepare("select review.textReview, date_format(date(review.dateReview),'%d/%m/%Y') as 'dateReview',review.noteReview, client.nickNameClient from review inner join client using(idClient) where idMovie = :idMovie order by review.dateReview desc");
+    $requete=$db->prepare("select * from price");
 
-    $requete->bindParam(':idMovie', $_GET['idMovie']);
     $requete->execute();
 
     $result = $requete->fetchAll(PDO::FETCH_ASSOC);

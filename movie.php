@@ -32,15 +32,22 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
                     </div>
 
-                     <select id="dateSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
+                    <select id="dateSeance" class="browser-default custom-select"
+                        style="margin-top:3px;max-width: 200px;">
                         <option selected="">Choisir une date</option>
                     </select>
 
-                    <select id="heureSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
-                        <option selected="">Choisir séance</option>
+                    <select id="heureSeance" class="browser-default custom-select"
+                        style="margin-top:3px;max-width: 200px;">
+                        <option selected="">Choisir une séance</option>
                     </select>
-                    <button type="button" class="btn btn-primary"
+
+                    <?php if (!empty($_SESSION['auth']->nickNameClient)) : ?>
+                    <button type="button" class="btn btn-primary" style="margin-top:3px;max-width: 100px;" id="reserver">Réserver</button>
+                    <?php else : ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notConnected"
                         style="margin-top:3px;max-width: 100px;">Réserver</button>
+                    <?php endif ; ?>
 
                 </div>
 
@@ -56,9 +63,8 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                 <button data-toggle="modal" data-target="#reviewModal" class="btn btn-success"
                     style="margin-bottom:3px;">Laisser un avis</button>
                 <?php else : ?>
-                <a href="#loginModal" data-toggle="modal" data-target="#loginModal">
-                    <small class='text-muted'>Connectez-vous pour laisser un avis</small>
-                </a>
+                <small class='text-muted'><a href="#loginModal" data-toggle="modal" data-target="#loginModal"
+                        style="color:#6c757d;"><strong>Connectez-vous</strong></a> pour laisser un avis</small>
                 <?php endif ; ?>
             </div>
             <div class="card-body">
@@ -75,30 +81,34 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
 <?php include "modalReview.php";?>
 <?php include "modalConnect.php";?>
+<?php if (!empty($_SESSION['auth']->nickNameClient)) : ?>
+<?php include "modalTicket.php";?>
+<?php endif ; ?>
+<?php include "modalNotConnected.php";?>
 <?php include "include/footer.php"; ?>
 <script>
 
     $(document).ready(function () {
         var idMovie = <?= $_GET['id'] ?>;
 
-        <?php if (!empty($_SESSION['auth']->idClient)) : ?>
-            var idClient = <?= $_SESSION['auth']->idClient ?>;
+        <?php if (!empty($_SESSION['auth'] -> idClient)) : ?>
+            var idClient = <?= $_SESSION['auth'] -> idClient ?>;
         <?php endif; ?>
 
-        $.ajax({
-            url: "requetes/getMovieById.php",
-            method: "GET",
-            data: { idMovie: idMovie },
-            dataType: "json",
-            success: function (movie) {
-                $("<strong>" + movie[0].titleMovie + "</strong>").appendTo("#title");
-                $("<h5> Réalisé par : " + movie[0].director + "</h5>").appendTo("#realisateur");
-                $("<p class='card-text'>" + movie[0].summaryMovie + "</p>").appendTo("#resume");
-                $("<img class='card-img-top img-fluid' src='" + movie[0].poster + "' alt='" + movie[0].titleMovie + "'>").appendTo("#image");
+            $.ajax({
+                url: "requetes/getMovieById.php",
+                method: "GET",
+                data: { idMovie: idMovie },
+                dataType: "json",
+                success: function (movie) {
+                    $("<strong>" + movie[0].titleMovie + "</strong>").appendTo("#title");
+                    $("<h5> Réalisé par : " + movie[0].director + "</h5>").appendTo("#realisateur");
+                    $("<p class='card-text'>" + movie[0].summaryMovie + "</p>").appendTo("#resume");
+                    $("<img class='card-img-top img-fluid' src='" + movie[0].poster + "' alt='" + movie[0].titleMovie + "'>").appendTo("#image");
 
 
-            }
-        });
+                }
+            });
 
         $.ajax({
             url: "requetes/getReviews.php",
@@ -137,26 +147,43 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
             }
         });
 
-        /*---------------------CHOIX DES SEACANCES-------------------------*/
-         $.ajax({
+        $.ajax({
+            url: "requetes/getPrices.php",
+            method: "GET",
+            dataType: "json",
+            success: function (prices) {
+                for (var i in prices) {
+                    var prix = Number.parseFloat(prices[i].prix).toFixed(2);
+                    var contenu = ""
+
+                    contenu += prices[i].namePrix + " (" + prix + "€)<input name='nb" + prices[i].namePrix + "' type='number' id='" + prices[i].namePrix + "'></input>";
+
+                    $("<label for='nb" + prices[i].namePrix + "' style='color: white;display: block;'>" + contenu + "</label>").appendTo("#prix");
+                }
+            }
+        });
+        //console.log("test");
+        /*---------------------CHOIX DES SEANCES-------------------------*/
+        $.ajax({
             url: "requetes/selectDate.php",
             method: "GET",
             data: { idMovie: idMovie },
             dataType: "json",
             success: function (seances) {
-                for(var i in seances){
-                    if(i>0){
-                        if(seances[i].dateSession != seances[i-1].dateSession) {
-                            $("<option value='"+seances[i].dateSession+"'>"+seances[i].dateSession+ "</option>").appendTo("#dateSeance");
+                console.log("test");
+                for (var i in seances) {
+                    if (i > 0) {
+                        if (seances[i].dateSession != seances[i - 1].dateSession) {
+                            $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
                         }
-                    }else {
-                        $("<option value='"+seances[i].dateSession+"'>"+seances[i].dateSession+"</option>").appendTo("#dateSeance");
-                    }  
+                    } else {
+                        $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
+                    }
                 }
             }
         });
 
-        $("#dateSeance").on('change', function(){
+        $("#dateSeance").on('change', function () {
             var dateSeance = $("#dateSeance").val();
             $(".added").remove();
             $.ajax({
@@ -165,24 +192,48 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                 data: { idMovie: idMovie },
                 dataType: "json",
                 success: function (seances) {
-                    for(var i in seances){
-                        if(seances[i].dateSession == dateSeance){
-                            $("<option class='added' value='"+seances[i].timeSession+"'>"+seances[i].timeSession+ "</option>").appendTo("#heureSeance");
-                        }  
+                    for (var i in seances) {
+                        if (seances[i].dateSession == dateSeance) {
+                            $("<option class='added' value='" + seances[i].timeSession + "'>" + seances[i].timeSession + "</option>").appendTo("#heureSeance");
+                        }
                     }
                 }
-            });    
+            });
         });
 
+        $("#validerReser").click(function (e) {
+            e.preventDefault();
+            if( $("#Adulte").val() == "" && $("#Enfant").val() == "" && $("#Etudiant").val() == "" ) {
+                alert('Veuillez choisir au moins 1 ticket.');
+            }else {
+                $("#prix").submit();
+            }
+            
+
+        });
+
+        $("#reserver").click(function (e){
+
+            if($('#dateSeance').val() == 'Choisir une date' || $('#heureSeance').val() == 'Choisir une séance' ) {
+                alert('Veuillez choisir une séance');
+            }else {
+                e.preventDefault();
+                document.getElementById("dateS").value = $('#dateSeance').val();
+                document.getElementById("heureS").value = $('#heureSeance').val();
+                document.getElementById("idMovie").value = idMovie;
+                $('#ticketModal').modal();
+            }
+            
+        });
 
         /*---------------------REVIEW-------------------------------------*/
 
         var note = 0;
         var txtReview;
 
-        if(note == 0 || $("#newReview").val() == ""){
+        if (note == 0 || $("#newReview").val() == "") {
             $('#postReview').prop("disabled", true);
-        }else {
+        } else {
             $('#postReview').prop("disabled", false);
         }
 
@@ -217,61 +268,61 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                 $(stars[i]).addClass('selected');
             }
 
-            if(note == 0 || $("#newReview").val() == ""){
+            if (note == 0 || $("#newReview").val() == "") {
                 $('#postReview').prop("disabled", true);
-            }else {
+            } else {
                 $('#postReview').prop("disabled", false);
             }
 
         });
 
-        $("#newReview").on('keyup', function(){
-            if(note == 0 || $("#newReview").val() == ""){
+        $("#newReview").on('keyup', function () {
+            if (note == 0 || $("#newReview").val() == "") {
                 $('#postReview').prop("disabled", true);
-            }else {
+            } else {
                 $('#postReview').prop("disabled", false);
             }
         });
 
 
         $("#postReview").on("click", function (event) {
-             txtReview = $("#newReview").val();
-             $.ajax({
-                 url: "requetes/postReview.php",
-                 method: "POST",
-                 data: {
-                     idMovie: idMovie,
-                     idClient: idClient,
-                     textReview: txtReview,
-                     noteReview: note
-                 },
-                 dataType: "json",
-                 success: function (review) {
-                     $("#empty").remove();
- 
-                     star = "";
- 
-                     for (var i = 0; i < review[0].noteReview; i++) {
-                         star += "<span class='fas fa-star' style='color: orange;'></span>"
-                     }
- 
-                     for (var i = 0; i < 5 - review[0].noteReview; i++) {
-                         star += "<span class='fas fa-star' style='color: grey;'></span>"
-                     }
- 
-                     contenu = "";
- 
-                     contenu += "<div>" + star + "</div>"
-                         + "<p>" + review[0].textReview + "</p>"
-                         + "<small class='text-muted'> Posté par " + review[0].nickNameClient + " le " + review[0].dateReview + "</small>";
- 
-                     $("<div>" + contenu + "</div><hr>").appendTo("#reviews");
- 
-                 }
-             });
+            txtReview = $("#newReview").val();
+            $.ajax({
+                url: "requetes/postReview.php",
+                method: "POST",
+                data: {
+                    idMovie: idMovie,
+                    idClient: idClient,
+                    textReview: txtReview,
+                    noteReview: note
+                },
+                dataType: "json",
+                success: function (review) {
+                    $("#empty").remove();
 
-             $('#reviewModal').modal('hide');
-         });
+                    star = "";
+
+                    for (var i = 0; i < review[0].noteReview; i++) {
+                        star += "<span class='fas fa-star' style='color: orange;'></span>"
+                    }
+
+                    for (var i = 0; i < 5 - review[0].noteReview; i++) {
+                        star += "<span class='fas fa-star' style='color: grey;'></span>"
+                    }
+
+                    contenu = "";
+
+                    contenu += "<div>" + star + "</div>"
+                        + "<p>" + review[0].textReview + "</p>"
+                        + "<small class='text-muted'> Posté par " + review[0].nickNameClient + " le " + review[0].dateReview + "</small>";
+
+                    $("<div>" + contenu + "</div><hr>").prependTo("#reviews");
+
+                }
+            });
+
+            $('#reviewModal').modal('hide');
+        });
 
         $('#reviewModal').on('hidden.bs.modal', function () {
             stars = $('#stars').children('li.star');

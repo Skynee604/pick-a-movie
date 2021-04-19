@@ -9,7 +9,7 @@ function isAjax() {
 if(isAjax()){
 
     // Préparation de la requête
-    $requete=$db->prepare("select date_format(dateSession,'%d/%m/%Y') as dateSession,timeSession,idMovie,adultPrice,childPrice,studentPrice from session where idMovie = :idMovie");
+    $requete=$db->prepare("select date_format(dateSession,'%d/%m/%Y') as dateSession,timeSession,idMovie from session where idMovie = :idMovie");
 
     $requete->bindParam(':idMovie', $_GET['idMovie']);
     $requete->execute();
@@ -22,7 +22,7 @@ if(isAjax()){
     echo $result;
 
 }else {
-    header('location: ../.');
+    //header('location: ../.');
 }
 
 ?>
