@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="background-color: #171717;backdrop-filter: blur(6px);">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="color:#cccccc;">Réservation impossible</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="color:#cccccc;"><strong>Réservation impossible</strong></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

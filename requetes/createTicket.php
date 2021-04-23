@@ -7,22 +7,25 @@ require "../include/connectDB.php";
 }
 
 if(isAjax()){*/
-$dateS = "01/05/2021";
-$timeS = "14:00:00";
+$dateS = $_POST['dateS'];
+$heureS = $_POST['heureS'];
+$idMovie  = $_POST['idMovie'];
+
     // Préparation de la requête
     $requete=$db->prepare("select idSession from session where date_format(dateSession,'%d/%m/%Y') like :dateSession and timeSession like :timeSession; and idMovie = :idMovie");
 
     $requete->bindParam(':dateSession', $dateS);
-    $requete->bindParam(':timeSession', $timeS);
+    $requete->bindParam(':timeSession', $heureS);
     $requete->bindParam(':idMovie', $idMovie);
     $requete->execute();
 
     $result = $requete->fetchObject();
+    $requete->closeCursor();
 
     $idSession = $result->idSession;
-    $idClient = 15;
-    $idPrice = 1;
-    $quant = 2;
+    $idClient = $_POST['idClient'];
+    $idPrice = $_POST['idPrice'];
+    $quant = $_POST['quant'];
 
     $requete2=$db->prepare("insert into ticket (idClient,idSession,idPrice,quant) values (:idClient, :idSession, :idPrice , :quant);");
 

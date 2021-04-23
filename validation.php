@@ -34,6 +34,14 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
 }
 
 ?>
+<form action="paiement.php" method="post" id="infos">
+    <input type="hidden" id="dateS" name="dateS"></input>
+    <input type="hidden" id="heureS" name="heureS"></input>
+    <input type="hidden" id="idMovie" name="idMovie"></input>
+    <input type="hidden" id="nbAdulte" name="nbAdulte"></input>
+    <input type="hidden" id="nbEnfant" name="nbEnfant"></input>
+    <input type="hidden" id="nbEtudiant" name="nbEtudiant"></input>
+</form>
 <div class="container">
 
     <div class="row">
@@ -43,7 +51,7 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
             <div class="card mt-4">
                 <div class="card-body">
                     <h3 class="card-title">
-                        Récapitulatif
+                        <strong>Récapitulatif</strong>
                     </h3>
 
                     <div id='movieName'>
@@ -63,7 +71,7 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
                         </tbody>
                     </table>
 
-                    <button type="button" class="btn btn-primary"style="margin-top:5px;">Procéder au paiement</button>
+                    <button id="btn_pay" type="button" class="btn btn-primary" style="margin-top:5px;">Procéder au paiement</button>
                     <input type="button" value="Annuler" class="btn btn-secondary" style="margin-top:5px;" onclick="javascript:history.back()">
 
 
@@ -98,6 +106,14 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
         <?php else : ?>
             var quantEtudiant = "";
         <?php endif; ?>
+
+        document.getElementById("dateS").value = '<?= $dateSeance ?>';
+        document.getElementById("heureS").value = '<?= $heureSeance ?>';
+        document.getElementById("idMovie").value = idMovie;
+        document.getElementById("nbAdulte").value = quantAdulte;
+        document.getElementById("nbEnfant").value = quantEnfant;
+        document.getElementById("nbEtudiant").value = quantEtudiant;
+
 
         $.ajax({
             url: "requetes/getMovieById.php",
@@ -172,6 +188,10 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
                 total = Number.parseFloat(total).toFixed(2);
                $("<tr><th scope='row' colspan='2'>Total</th><td>" + total +"€</td></tr>").appendTo("#tablePrix");
             }
+        });
+
+        $("#btn_pay").on("click", function(){
+            $("#infos").submit();
         });
 
     });
