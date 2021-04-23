@@ -24,4 +24,21 @@ select
 from
   session
 where
-  idMovie = 3
+  idMovie = 3;
+select
+  idTicket,
+  movie.thumbnail,
+  movie.titleMovie,
+  session.dateSession,
+  session.timeSession,
+  price.namePrix,
+  price.prix,
+  quant
+from
+  price,
+  ticket
+  inner join session using(idSession)
+  inner join movie using(idMovie)
+WHERE
+  ticket.idPrice = price.idPrix
+  AND idClient = 15;

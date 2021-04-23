@@ -28,7 +28,7 @@ if(!empty($_POST['email']) && !empty($_POST['pseudo']) && !empty($_POST['prenom'
 
             <h1 style="margin-top: 100px; text-align:center"><a href="."><img src="assets/logo_small_icon_only.png"
                         style="postion:relative;"></img></a><br><br>
-                Créez votre compte</h1>
+                <strong>Créez votre compte</strong></h1>
         </div>
     </div>
 </section><br>

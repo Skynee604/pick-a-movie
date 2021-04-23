@@ -4,6 +4,10 @@
 
 $dateSeance = $_POST['dateS'];
 
+if($_POST['nbAdulte'] < 0 || $_POST['nbEnfant'] < 0 ||  $_POST['nbEtudiant'] < 0) {
+    header('location: .');
+}
+
 if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEtudiant'])){
     header('location: .');
 }else if(empty($_POST['idMovie']) || empty($_POST['dateS']) || empty($_POST['heureS']) || empty($_SESSION['auth']->nickNameClient)) {

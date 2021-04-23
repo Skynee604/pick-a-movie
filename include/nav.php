@@ -47,8 +47,7 @@ if (isset($_POST['btnDeco'])) $authentication->logout($_SERVER['HTTP_REFERER']);
                <strong> <?= $_SESSION['auth']->nickNameClient ?> </strong>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="history.php">Historique des achats</a>
                 <div class="dropdown-divider"></div>
                 <form method='POST'>
                     <button id='btnDeco' name="btnDeco"  class="dropdown-item" type="submit">Déconnexion</button>

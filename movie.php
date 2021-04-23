@@ -137,7 +137,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
                     contenu += "<div>" + star + "</div>"
                         + "<p>" + reviews[i].textReview + "</p>"
-                        + "<small class='text-muted'> Posté par " + reviews[i].nickNameClient + " le " + reviews[i].dateReview + "</small>";
+                        + "<small class='text-muted'> Posté par <strong>" + reviews[i].nickNameClient + "</strong> le " + reviews[i].dateReview + "</small>";
 
                     $("<div>" + contenu + "</div><hr>").appendTo("#reviews");
 
@@ -156,7 +156,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
                     var prix = Number.parseFloat(prices[i].prix).toFixed(2);
                     var contenu = ""
 
-                    contenu += prices[i].namePrix + " (" + prix + "€)<input name='nb" + prices[i].namePrix + "' type='number' id='" + prices[i].namePrix + "'></input>";
+                    contenu += prices[i].namePrix + " (" + prix + "€)<input name='nb" + prices[i].namePrix + "' type='number' min='0' oninput='validity.valid||(value='');' id='" + prices[i].namePrix + "'></input>";
 
                     $("<label for='nb" + prices[i].namePrix + "' style='color: white;display: block;'>" + contenu + "</label>").appendTo("#prix");
                 }
@@ -203,7 +203,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
         $("#validerReser").click(function (e) {
             e.preventDefault();
-            if( $("#Adulte").val() == "" && $("#Enfant").val() == "" && $("#Etudiant").val() == "" ) {
+            if( $("#Adulte").val() == "" && $("#Enfant").val() == "" && $("#Etudiant").val() == "" || $("#Adulte").val() <= 0 && $("#Enfant").val() <= 0 && $("#Etudiant").val() <= 0 || $("#Adulte").val() < 0 || $("#Enfant").val() < 0 || $("#Etudiant").val() < 0) {
                 alert('Veuillez choisir au moins 1 ticket.');
             }else {
                 $("#prix").submit();
@@ -314,7 +314,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
                     contenu += "<div>" + star + "</div>"
                         + "<p>" + review[0].textReview + "</p>"
-                        + "<small class='text-muted'> Posté par " + review[0].nickNameClient + " le " + review[0].dateReview + "</small>";
+                        + "<small class='text-muted'> Posté par <strong>" + review[0].nickNameClient + "</strong> le " + review[0].dateReview + "</small>";
 
                     $("<div>" + contenu + "</div><hr>").prependTo("#reviews");
 

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 13 avr. 2021 à 14:16
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Généré le :  ven. 23 avr. 2021 à 22:03
+-- Version du serveur :  8.0.18
+-- Version de PHP :  7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `db_pickamovie`
+-- Base de données :  `db_pickamovie`
 --
 
 -- --------------------------------------------------------
@@ -35,13 +36,6 @@ CREATE TABLE IF NOT EXISTS `admin` (
   KEY `idClient` (`idClient`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Déchargement des données de la table `admin`
---
-
-INSERT INTO `admin` (`idAdmin`, `idClient`) VALUES
-(4, 15);
-
 -- --------------------------------------------------------
 
 --
@@ -51,27 +45,21 @@ INSERT INTO `admin` (`idAdmin`, `idClient`) VALUES
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
   `idClient` int(11) NOT NULL AUTO_INCREMENT,
-  `nickNameClient` varchar(50) COLLATE utf8_bin NOT NULL,
-  `nameClient` varchar(50) COLLATE utf8_bin NOT NULL,
-  `firstNameClient` varchar(50) COLLATE utf8_bin NOT NULL,
-  `pwdClient` varchar(150) COLLATE utf8_bin NOT NULL,
-  `emailClient` varchar(50) COLLATE utf8_bin NOT NULL,
+  `nickNameClient` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `nameClient` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `firstNameClient` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `pwdClient` varchar(150) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `emailClient` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idClient`),
   KEY `idClient` (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`idClient`, `nickNameClient`, `nameClient`, `firstNameClient`, `pwdClient`, `emailClient`) VALUES
-(15, 'Loova', 'Valentin', 'Durieux', '$2y$10$ka8iPVSJcWFynaGrrbQl5ONzhtJuZe40jJV1j9YR2PIkWyRvuSbue', 'test@email.com'),
-(25, 'r', 'r', 'r', '$2y$10$rdOy3g3pJgP/fQm7fkOZ7.04y/TGqJN4uvXVr6bXOs47M1SEXid4e', 'valentin.durieux@gmail.com'),
-(28, 'voiture', 'stylo', 'velo', '$2y$10$7z54N6Uhb7SrK7LxIDYK2.TelISXSUeywV76FV2SR3ji.ji9qG4uu', 'test4@email.com'),
-(29, 'test', 'test', 'test', '$2y$10$vSfcrRQLxPOxDPbrcRDQv.tzisoUN0twGg8/j9vPcyXsEWwkocLGu', 'test@emai.com'),
-(30, 'kurtJMH', 'Durieux', 'Valentin', '$2y$10$AuXRs/IW1xaR3g9N0Z551u3mUNWjI07OhSHzj69HaVLTjgS.LlAZm', 'val@val.com'),
-(31, 'bite', 'durieux', 'valentin', '$2y$10$Ozk/KkOwNa/yRUbCFaqF4.hK043iyp3vOhcge1wE5/s/1PW/y85Ge', 'a@test.com'),
-(32, 'Math1970', 'Daix', 'Mathilde', '$2y$10$.AbU8THnMREz/0MA2gxEpOaWesOF1wsBYR30a/juFEurqdU3B0/G6', 'mathilde@email.com');
+(33, 'Utilisateur1', 'Doe', 'John', '$2y$10$7PP7uRLnkdlsh5r.rZt93Oiv421NRxx8c4jPfimcX.wj/5HuxQ9XO', 'test@email.com');
 
 -- --------------------------------------------------------
 
@@ -82,35 +70,35 @@ INSERT INTO `client` (`idClient`, `nickNameClient`, `nameClient`, `firstNameClie
 DROP TABLE IF EXISTS `movie`;
 CREATE TABLE IF NOT EXISTS `movie` (
   `idMovie` int(11) NOT NULL AUTO_INCREMENT,
-  `titleMovie` varchar(100) COLLATE utf8_bin NOT NULL,
-  `director` varchar(60) COLLATE utf8_bin NOT NULL,
-  `summaryMovie` text COLLATE utf8_bin NOT NULL,
-  `poster` varchar(200) COLLATE utf8_bin NOT NULL,
-  `header` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `thumbnail` varchar(200) COLLATE utf8_bin NOT NULL,
+  `titleMovie` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `director` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `summaryMovie` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `poster` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `header` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `thumbnail` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idMovie`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `movie`
 --
 
 INSERT INTO `movie` (`idMovie`, `titleMovie`, `director`, `summaryMovie`, `poster`, `header`, `thumbnail`) VALUES
-(2, 'Star Wars : l\'empire contre attaque', 'Georges Lucas', 'Les Rebelles sont dispers?s apr?s l?attaque de leur base. Han et Leia sont poursuivis tandis que Luke s?entra?ne avec ma?tre Yoda. Mais quand Luke affronte Vador, il d?couvre la v?rit? sur son pass?.', 'images/posters/starwars.jpg', 'images/headers/StarWarsHeader.jpg', 'images/miniatures/StarWars.jpg'),
-(3, 'Alien', 'Ridley Scott', 'R?alis? par Ridley Scott, ce classique de la science-fiction raconte l\'histoire de Ripley (Sigourney Weaver) qui enqu?te sur un appel de d?tresse provenant d\'une plan?te lointaine et fait une d?couverte effroyable.', 'images/posters/alien.jpg', 'images/headers/alienHeader.jpg', 'images/miniatures/Alien.jpg'),
-(4, 'Bob l\'?ponge : le film', 'Stephen Hillenburg ', 'Quand son meilleur ami est kidnapp?, Bob l\'?ponge entra?ne Patrick dans une folle aventure loin de Bikini Bottom pour sauver leur compagnon ? coquille rose.', 'images/posters/bobleponge.jpg', 'images/headers/2017_SpongeBob_Collection_Header.webp', 'images/miniatures/BobLeponge.jpg'),
-(5, 'The Darjeeling Limited', 'Wes Anderson', 'Francis, Jack et Peter, trois fr?res qui ne se sont pas vus depuis la mort de leur p?re, d?cident de faire un grand voyage en train ? travers l\'Inde pour renouer les liens fraternels. Mais tr?s vite, la \"qu?te spirituelle\" va d?railler : ils vont se retrouver seuls, perdus au milieu du d?sert avec onze valises, une imprimante, une machine ? plastifier et beaucoup de comptes ? r?gler avec la vie...', 'images/posters/darjeelinglimited.jpg', NULL, 'images/miniatures/DarjeelingLimited.jpg'),
-(6, 'DeadPool', 'Tim Miller', 'Bas? sur l\'antih?ros le moins conventionnel de l\'univers Marvel, Deadpool raconte l\'histoire des origines de Wade Wilson, un mercenaire qui traque l\'homme qui a presque an?anti sa vie.', 'images/posters/deadpool.jpg', 'images/headers/deadPoolHeader.jpg', 'images/miniatures/DeadPool.jpg'),
-(7, 'ET, l?extraterrestre', 'Steven Spielberg', 'Pour devenir l\'ami d\'une cr?ature de l\'espace qui veut rentrer chez elle, il faut de la patience et beaucoup de bonbons.', 'images/posters/E.T.jpg', NULL, 'images/miniatures/ET.jpg'),
-(8, 'India Jones et la derni?re croisade', 'Steven Spielberg', 'Accompagn? de son p?re pour sa troisi?me aventure, Indiana Jones part explorer le berceau de la civilisation dans une nouvelle qu?te du Graal.', 'images/posters/IndianaJones.jpg', 'images/headers/indianaJonesHeader.jpg', 'images/miniatures/IndianaJones.jpg'),
-(9, 'Iron Man', 'Jon Favreau', 'Survivant d\'une attaque en territoire ennemi, l\'homme d\'affaires Tony Stark fabrique une armure high-tech pour d?fendre le monde sous le nom de Iron Man.', 'images/posters/ironman.jpg', NULL, 'images/miniatures/IronMan.jpg'),
-(10, 'Big Trouble in Little China', 'John Carpenter', 'Un camionneur macho est plong? dans un monde ?trange, quand la fianc?e de son ami est kidnapp?e par des forces myst?rieuses dans le quartier de Chinatown, ? San Francisco.', 'images/posters/jackburton.jpg', 'images/headers/jackBurtonHeader.jpg', 'images/miniatures/JackBurton.jpg'),
-(11, 'Jurassic Park', 'Steven Spielberg', '? moins que vous ne soyez pr?ts ? lutter pour votre survie, il vaut mieux ne pas toucher ? l\'ADN de dinosaure fossilis?.', 'images/posters/jurassicpark.jpg', 'images/headers/jurassicParkHeader.jpg', 'images/miniatures/JurassicPark.jpg'),
-(12, 'La vie aquatique', 'Wes Anderson', 'Steve Zissou (Bill Murray) et son ?quipe traquent le myst?rieux requin-jaguar, une cr?ature quasi-mythique qui a tu? le co?quipier de Steve pendant le tournage d?un documentaire.', 'images/posters/lavieaquatique.png', NULL, 'images/miniatures/LaVieAquatique.jpg'),
-(13, 'Scooby-Doo', 'Raja Gosnell', 'La bande de Scooby-Doo se retrouve sur Spooky Island pour comprendre la cause d\'une s?rie d\'incidents paranormaux.', 'images/posters/scoobydoo.jpg', NULL, 'images/miniatures/ScoobyDoo.jpg'),
-(14, 'Soul', 'Pete Docter', 'Les studios Pixar Animation vous propulsent depuis les rues de New York dans des dimensions cosmiques, en qu?te de r?ponses ? de grandes questions existentielles.', 'images/posters/soul.png', 'images/headers/soulHeader.jpg', 'images/miniatures/Soul.jpg'),
-(15, 'Spider-Man : far from home', 'Jon Watts', 'M?me les super-h?ros ont parfois besoin de vacances, mais une nouvelle menace oblige Peter Parker ? passer ? l\'action lors d\'un voyage scolaire en Europe.', 'images/posters/spiderman.png', NULL, 'images/miniatures/SpiderMan.jpg'),
-(16, 'Toy Story', 'John Lasseter', 'Bienvenue dans un monde ?patant o? les jouets jouent quand leurs propri?taires ne sont pas l?. Rencontrez Woody, Buzz et tous leurs amis dans une aventure remplie d?humour, de c?ur et d?amiti?.', 'images/posters/toystory.jpg', 'images/headers/toyStoryHeader.jpg', 'images/miniatures/ToyStory.jpg');
+(2, 'Star Wars : l\'empire contre attaque', 'Georges Lucas', 'Les Rebelles sont dispersés après l\'attaque de leur base. Han et Leia sont poursuivis tandis que Luke s\'entraîne avec maître Yoda. Mais quand Luke affronte Vador, il découvre la vérité sur son passé.', 'images/posters/starwars.jpg', 'images/headers/StarWarsHeader.jpg', 'images/miniatures/StarWars.jpg'),
+(3, 'Alien', 'Ridley Scott', 'Réalisé par Ridley Scott, ce classique de la science-fiction raconte l\'histoire de Ripley (Sigourney Weaver) qui enquête sur un appel de détresse provenant d\'une planète lointaine et fait une découverte effroyable.', 'images/posters/alien.jpg', 'images/headers/alienHeader.jpg', 'images/miniatures/Alien.jpg'),
+(4, 'Bob l\'éponge : le film', 'Stephen Hillenburg ', 'A Bikini Bottom, quelqu\'un a volé la couronne du roi Neptune, et le patron de Bob l\'éponge, M. Krabs, figure en tête des suspects. Convaincus de son innocence, Bob et Patrick partent pour Shell City avec l\'intention de le disculper et de restituer sa couronne à Neptune. ', 'images/posters/bobleponge.jpg', 'images/headers/2017_SpongeBob_Collection_Header.webp', 'images/miniatures/BobLeponge.jpg'),
+(5, 'The Darjeeling Limited', 'Wes Anderson', 'Francis, Jack et Peter, trois frères qui ne se sont pas vus depuis la mort de leur père, décident de faire un grand voyage en train à travers l\'Inde pour renouer les liens fraternels. Mais très vite, la \"quête spirituelle\" va dérailler : ils vont se retrouver seuls, perdus au milieu du désert avec onze valises, une imprimante, une machine à plastifier et beaucoup de comptes à régler avec la vie...', 'images/posters/darjeelinglimited.jpg', NULL, 'images/miniatures/DarjeelingLimited.jpg'),
+(6, 'DeadPool', 'Tim Miller', 'Basé sur l\'antihéros le moins conventionnel de l\'univers Marvel, Deadpool raconte l\'histoire des origines de Wade Wilson, un mercenaire qui traque l\'homme qui a presque anéanti sa vie.', 'images/posters/deadpool.jpg', 'images/headers/deadPoolHeader.jpg', 'images/miniatures/DeadPool.jpg'),
+(7, 'ET, l\'extraterrestre', 'Steven Spielberg', 'Pour devenir l\'ami d\'une créature de l\'espace qui veut rentrer chez elle, il faut de la patience et beaucoup de bonbons.', 'images/posters/E.T.jpg', NULL, 'images/miniatures/ET.jpg'),
+(8, 'India Jones et la dernière croisade', 'Steven Spielberg', 'Accompagné de son père pour sa troisième aventure, Indiana Jones part explorer le berceau de la civilisation dans une nouvelle quête du Graal.', 'images/posters/IndianaJones.jpg', 'images/headers/indianaJonesHeader.jpg', 'images/miniatures/IndianaJones.jpg'),
+(9, 'Iron Man', 'Jon Favreau', 'Survivant d\'une attaque en territoire ennemi, l\'homme d\'affaires Tony Stark fabrique une armure high-tech pour défendre le monde sous le nom de Iron Man.', 'images/posters/ironman.jpg', NULL, 'images/miniatures/IronMan.jpg'),
+(10, 'Big Trouble in Little China', 'John Carpenter', 'Un camionneur macho est plongé dans un monde étrange, quand la fiancée de son ami est kidnappée par des forces mystérieuses dans le quartier de Chinatown, à San Francisco.', 'images/posters/jackburton.jpg', 'images/headers/jackBurtonHeader.jpg', 'images/miniatures/JackBurton.jpg'),
+(11, 'Jurassic Park', 'Steven Spielberg', 'À moins que vous ne soyez prêts à lutter pour votre survie, il vaut mieux ne pas toucher à l\'ADN de dinosaure fossilisé.', 'images/posters/jurassicpark.jpg', 'images/headers/jurassicParkHeader.jpg', 'images/miniatures/JurassicPark.jpg'),
+(12, 'La vie aquatique', 'Wes Anderson', 'Steve Zissou (Bill Murray) et son équipe traquent le mystérieux requin-jaguar, une créature quasi-mythique qui a tué le coéquipier de Steve pendant le tournage d\'un documentaire.', 'images/posters/lavieaquatique.png', NULL, 'images/miniatures/LaVieAquatique.jpg'),
+(13, 'Scooby-Doo', 'Raja Gosnell', 'La bande de Scooby-Doo se retrouve sur Spooky Island pour comprendre la cause d\'une série d\'incidents paranormaux.', 'images/posters/scoobydoo.jpg', NULL, 'images/miniatures/ScoobyDoo.jpg'),
+(14, 'Soul', 'Pete Docter', 'Les studios Pixar Animation vous propulsent depuis les rues de New York dans des dimensions cosmiques, en quête de réponses à de grandes questions existentielles.', 'images/posters/soul.png', 'images/headers/soulHeader.jpg', 'images/miniatures/Soul.jpg'),
+(15, 'Spider-Man : far from home', 'Jon Watts', 'M?me les super-héros ont parfois besoin de vacances, mais une nouvelle menace oblige Peter Parker à passer à l\'action lors d\'un voyage scolaire en Europe.', 'images/posters/spiderman.png', NULL, 'images/miniatures/SpiderMan.jpg'),
+(16, 'Toy Story', 'John Lasseter', 'Bienvenue dans un monde épatant où les jouets jouent quand leurs propriétaires ne sont pas là. Rencontrez Woody, Buzz et tous leurs amis dans une aventure remplie d\'humour, de coeur et d\'amitié.', 'images/posters/toystory.jpg', 'images/headers/toyStoryHeader.jpg', 'images/miniatures/ToyStory.jpg');
 
 -- --------------------------------------------------------
 
@@ -121,43 +109,19 @@ INSERT INTO `movie` (`idMovie`, `titleMovie`, `director`, `summaryMovie`, `poste
 DROP TABLE IF EXISTS `price`;
 CREATE TABLE IF NOT EXISTS `price` (
   `idPrix` int(11) NOT NULL AUTO_INCREMENT,
+  `namePrix` varchar(50) COLLATE utf8_bin NOT NULL,
   `prix` double NOT NULL,
   PRIMARY KEY (`idPrix`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Structure de la table `purchase`
+-- Déchargement des données de la table `price`
 --
 
-DROP TABLE IF EXISTS `purchase`;
-CREATE TABLE IF NOT EXISTS `purchase` (
-  `idPurchase` int(11) NOT NULL AUTO_INCREMENT,
-  `idClient` int(11) NOT NULL,
-  `idTicket` int(11) NOT NULL,
-  `idTicket2` int(11) DEFAULT NULL,
-  `idTicket3` int(11) DEFAULT NULL,
-  `idTicket4` int(11) DEFAULT NULL,
-  `idTicket5` int(11) DEFAULT NULL,
-  `idTicket6` int(11) DEFAULT NULL,
-  `idTicket7` int(11) DEFAULT NULL,
-  `idTicket8` int(11) DEFAULT NULL,
-  `idTicket9` int(11) DEFAULT NULL,
-  `idTicket10` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idPurchase`),
-  KEY `fk_purchaseClient` (`idClient`),
-  KEY `fk_purchaseTicket` (`idTicket`),
-  KEY `fk_purchaseTicket2` (`idTicket2`),
-  KEY `fk_purchaseTicket3` (`idTicket3`),
-  KEY `fk_purchaseTicket4` (`idTicket4`),
-  KEY `fk_purchaseTicket5` (`idTicket5`),
-  KEY `fk_purchaseTicket6` (`idTicket6`),
-  KEY `fk_purchaseTicket7` (`idTicket7`),
-  KEY `fk_purchaseTicket8` (`idTicket8`),
-  KEY `fk_purchaseTicket9` (`idTicket9`),
-  KEY `fk_purchaseTicket10` (`idTicket10`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+INSERT INTO `price` (`idPrix`, `namePrix`, `prix`) VALUES
+(1, 'Adulte', 9),
+(2, 'Enfant', 6.5),
+(3, 'Etudiant', 8);
 
 -- --------------------------------------------------------
 
@@ -168,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `purchase` (
 DROP TABLE IF EXISTS `review`;
 CREATE TABLE IF NOT EXISTS `review` (
   `idReview` int(11) NOT NULL AUTO_INCREMENT,
-  `textReview` text COLLATE utf8_bin NOT NULL,
+  `textReview` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `dateReview` datetime NOT NULL,
   `noteReview` int(1) NOT NULL,
   `idClient` int(11) NOT NULL,
@@ -176,16 +140,29 @@ CREATE TABLE IF NOT EXISTS `review` (
   PRIMARY KEY (`idReview`),
   KEY `fk_reviewMovie` (`idMovie`),
   KEY `fk_reviewClient` (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `review`
 --
 
 INSERT INTO `review` (`idReview`, `textReview`, `dateReview`, `noteReview`, `idClient`, `idMovie`) VALUES
-(1, 'Ce film est g?nial je kiff lol', '2021-04-12 21:25:00', 4, 15, 2),
-(2, 'Ce film est trop cool j\'ai pass? un bon moment', '2021-04-12 21:26:00', 5, 15, 2),
-(3, 'C\'est bon film sympathique!!', '2021-04-12 21:27:00', 3, 15, 10);
+(47, 'Tr&egrave;s bon film !', '2021-04-23 23:32:37', 4, 33, 2),
+(48, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:33:35', 5, 33, 2),
+(49, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:33:54', 3, 33, 2),
+(50, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta ', '2021-04-23 23:34:30', 1, 33, 3),
+(51, 'J\'ai eu tr&egrave;s peur !!', '2021-04-23 23:35:00', 4, 33, 3),
+(52, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta ', '2021-04-23 23:35:20', 5, 33, 4),
+(53, 'Tr&egrave;s marrant ce film, je recommande !', '2021-04-23 23:36:13', 3, 33, 4),
+(54, 'Un chef-d\'&oelig;uvre d\'humour...', '2021-04-23 23:37:26', 3, 33, 6),
+(55, 'Spielberg &agrave; son meilleur !', '2021-04-23 23:38:07', 2, 33, 8),
+(56, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:39:04', 4, 33, 9),
+(57, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:39:29', 1, 33, 9),
+(58, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:39:36', 4, 33, 9),
+(59, 'Que de myst&egrave;res ...', '2021-04-23 23:40:04', 5, 33, 10),
+(60, 'Un classique, &agrave; n\'en pas douter.', '2021-04-23 23:40:43', 5, 33, 11),
+(61, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:40:57', 4, 33, 12),
+(62, 'Le film de mon enfance :)', '2021-04-23 23:41:16', 5, 33, 16);
 
 -- --------------------------------------------------------
 
@@ -199,20 +176,141 @@ CREATE TABLE IF NOT EXISTS `session` (
   `dateSession` date NOT NULL,
   `timeSession` time NOT NULL,
   `idMovie` int(11) NOT NULL,
-  `adultPrice` double NOT NULL,
-  `childPrice` double DEFAULT NULL,
-  `studentPrice` double DEFAULT NULL,
   PRIMARY KEY (`idSession`),
   KEY `fk_sessionMovie` (`idMovie`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `session`
 --
 
-INSERT INTO `session` (`idSession`, `dateSession`, `timeSession`, `idMovie`, `adultPrice`, `childPrice`, `studentPrice`) VALUES
-(1, '2021-05-01', '14:00:00', 3, 11, 8, 9),
-(2, '2021-05-01', '15:30:00', 10, 11, 8, 9);
+INSERT INTO `session` (`idSession`, `dateSession`, `timeSession`, `idMovie`) VALUES
+(6, '2021-05-29', '15:00:00', 2),
+(7, '2021-05-29', '20:00:00', 2),
+(10, '2021-05-29', '22:00:00', 2),
+(11, '2021-06-05', '15:00:00', 2),
+(12, '2021-06-05', '20:00:00', 2),
+(13, '2021-06-05', '22:00:00', 2),
+(14, '2021-06-12', '15:00:00', 2),
+(15, '2021-06-12', '20:00:00', 2),
+(16, '2021-06-12', '22:00:00', 2),
+(20, '2021-05-29', '15:00:00', 3),
+(21, '2021-05-29', '20:00:00', 3),
+(22, '2021-05-29', '22:00:00', 3),
+(23, '2021-06-05', '15:00:00', 3),
+(24, '2021-06-05', '20:00:00', 3),
+(25, '2021-06-05', '22:00:00', 3),
+(26, '2021-06-12', '15:00:00', 3),
+(27, '2021-06-12', '20:00:00', 3),
+(28, '2021-06-12', '22:00:00', 3),
+(29, '2021-05-29', '15:00:00', 4),
+(30, '2021-05-29', '20:00:00', 4),
+(31, '2021-05-29', '22:00:00', 4),
+(32, '2021-06-05', '15:00:00', 4),
+(33, '2021-06-05', '20:00:00', 4),
+(34, '2021-06-05', '22:00:00', 4),
+(35, '2021-06-12', '15:00:00', 4),
+(36, '2021-06-12', '20:00:00', 4),
+(37, '2021-06-12', '22:00:00', 4),
+(38, '2021-05-29', '15:00:00', 5),
+(39, '2021-05-29', '20:00:00', 5),
+(40, '2021-05-29', '22:00:00', 5),
+(41, '2021-06-05', '15:00:00', 5),
+(42, '2021-06-05', '20:00:00', 5),
+(43, '2021-06-05', '22:00:00', 5),
+(44, '2021-06-12', '15:00:00', 5),
+(45, '2021-06-12', '20:00:00', 5),
+(46, '2021-06-12', '22:00:00', 5),
+(56, '2021-05-29', '15:00:00', 6),
+(57, '2021-05-29', '20:00:00', 6),
+(58, '2021-05-29', '22:00:00', 6),
+(59, '2021-06-05', '15:00:00', 6),
+(60, '2021-06-05', '20:00:00', 6),
+(61, '2021-06-05', '22:00:00', 6),
+(62, '2021-06-12', '15:00:00', 6),
+(63, '2021-06-12', '20:00:00', 6),
+(64, '2021-06-12', '22:00:00', 6),
+(65, '2021-05-29', '15:00:00', 7),
+(66, '2021-05-29', '20:00:00', 7),
+(67, '2021-05-29', '22:00:00', 7),
+(68, '2021-06-05', '15:00:00', 7),
+(69, '2021-06-05', '20:00:00', 7),
+(70, '2021-06-05', '22:00:00', 7),
+(71, '2021-06-12', '15:00:00', 7),
+(72, '2021-06-12', '20:00:00', 7),
+(73, '2021-06-12', '22:00:00', 7),
+(74, '2021-05-29', '15:00:00', 8),
+(75, '2021-05-29', '20:00:00', 8),
+(76, '2021-05-29', '22:00:00', 8),
+(77, '2021-06-05', '15:00:00', 8),
+(78, '2021-06-05', '20:00:00', 8),
+(79, '2021-06-05', '22:00:00', 8),
+(80, '2021-06-12', '15:00:00', 8),
+(81, '2021-06-12', '20:00:00', 8),
+(82, '2021-06-12', '22:00:00', 8),
+(83, '2021-05-29', '15:00:00', 9),
+(84, '2021-05-29', '20:00:00', 9),
+(85, '2021-05-29', '22:00:00', 9),
+(86, '2021-06-05', '15:00:00', 9),
+(87, '2021-06-05', '20:00:00', 9),
+(88, '2021-06-05', '22:00:00', 9),
+(89, '2021-06-12', '15:00:00', 9),
+(90, '2021-06-12', '20:00:00', 9),
+(91, '2021-06-12', '22:00:00', 9),
+(92, '2021-05-29', '15:00:00', 10),
+(93, '2021-05-29', '20:00:00', 10),
+(94, '2021-05-29', '22:00:00', 10),
+(95, '2021-06-05', '15:00:00', 10),
+(96, '2021-06-05', '20:00:00', 10),
+(97, '2021-06-05', '22:00:00', 10),
+(98, '2021-06-12', '15:00:00', 10),
+(99, '2021-06-12', '20:00:00', 10),
+(100, '2021-06-12', '22:00:00', 10),
+(101, '2021-05-29', '15:00:00', 11),
+(102, '2021-05-29', '20:00:00', 11),
+(103, '2021-05-29', '22:00:00', 11),
+(104, '2021-06-05', '15:00:00', 11),
+(105, '2021-06-05', '20:00:00', 11),
+(106, '2021-06-05', '22:00:00', 11),
+(107, '2021-06-12', '15:00:00', 11),
+(108, '2021-06-12', '20:00:00', 11),
+(109, '2021-06-12', '22:00:00', 11),
+(110, '2021-05-29', '15:00:00', 12),
+(111, '2021-05-29', '20:00:00', 12),
+(112, '2021-05-29', '22:00:00', 12),
+(113, '2021-06-05', '15:00:00', 12),
+(114, '2021-06-05', '20:00:00', 12),
+(115, '2021-06-05', '22:00:00', 12),
+(116, '2021-06-12', '15:00:00', 12),
+(117, '2021-06-12', '20:00:00', 12),
+(118, '2021-06-12', '22:00:00', 12),
+(119, '2021-05-29', '15:00:00', 13),
+(120, '2021-05-29', '20:00:00', 13),
+(121, '2021-05-29', '22:00:00', 13),
+(122, '2021-06-05', '15:00:00', 13),
+(123, '2021-06-05', '20:00:00', 13),
+(124, '2021-06-05', '22:00:00', 13),
+(125, '2021-06-12', '15:00:00', 13),
+(126, '2021-06-12', '20:00:00', 13),
+(127, '2021-06-12', '22:00:00', 13),
+(128, '2021-05-29', '15:00:00', 14),
+(129, '2021-05-29', '20:00:00', 14),
+(130, '2021-05-29', '22:00:00', 14),
+(131, '2021-06-05', '15:00:00', 14),
+(132, '2021-06-05', '20:00:00', 14),
+(133, '2021-06-05', '22:00:00', 14),
+(134, '2021-06-12', '15:00:00', 14),
+(135, '2021-06-12', '20:00:00', 14),
+(136, '2021-06-12', '22:00:00', 14),
+(137, '2021-05-29', '15:00:00', 15),
+(138, '2021-05-29', '20:00:00', 15),
+(139, '2021-05-29', '22:00:00', 15),
+(140, '2021-06-05', '15:00:00', 15),
+(141, '2021-06-05', '20:00:00', 15),
+(142, '2021-06-05', '22:00:00', 15),
+(143, '2021-06-12', '15:00:00', 15),
+(144, '2021-06-12', '20:00:00', 15),
+(145, '2021-06-12', '22:00:00', 15);
 
 -- --------------------------------------------------------
 
@@ -223,12 +321,27 @@ INSERT INTO `session` (`idSession`, `dateSession`, `timeSession`, `idMovie`, `ad
 DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE IF NOT EXISTS `ticket` (
   `idTicket` int(11) NOT NULL AUTO_INCREMENT,
+  `idClient` int(11) NOT NULL,
   `idSession` int(11) NOT NULL,
   `idPrice` int(11) NOT NULL,
-  PRIMARY KEY (`idTicket`),
-  KEY `fkTicketSession` (`idSession`),
-  KEY `fk_ticketPrice` (`idPrice`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `quant` int(3) NOT NULL,
+  PRIMARY KEY (`idTicket`) USING BTREE,
+  KEY `fk_ticketClient` (`idClient`) USING BTREE,
+  KEY `fk_ticketPrice` (`idPrice`) USING BTREE,
+  KEY `fkTicketSession` (`idSession`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `ticket`
+--
+
+INSERT INTO `ticket` (`idTicket`, `idClient`, `idSession`, `idPrice`, `quant`) VALUES
+(41, 33, 6, 1, 2),
+(42, 33, 20, 1, 1),
+(43, 33, 92, 1, 1),
+(44, 33, 13, 3, 2),
+(45, 33, 117, 1, 1),
+(46, 33, 117, 2, 1);
 
 --
 -- Contraintes pour les tables déchargées
@@ -238,43 +351,28 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 -- Contraintes pour la table `admin`
 --
 ALTER TABLE `admin`
-  ADD CONSTRAINT `fk_adminClient` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`);
-
---
--- Contraintes pour la table `purchase`
---
-ALTER TABLE `purchase`
-  ADD CONSTRAINT `fk_purchaseClient` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket` FOREIGN KEY (`idTicket`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket10` FOREIGN KEY (`idTicket10`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket2` FOREIGN KEY (`idTicket2`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket3` FOREIGN KEY (`idTicket3`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket4` FOREIGN KEY (`idTicket4`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket5` FOREIGN KEY (`idTicket5`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket6` FOREIGN KEY (`idTicket6`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket7` FOREIGN KEY (`idTicket7`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket8` FOREIGN KEY (`idTicket8`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_purchaseTicket9` FOREIGN KEY (`idTicket9`) REFERENCES `ticket` (`idTicket`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_adminClient` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `fk_reviewClient` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`),
-  ADD CONSTRAINT `fk_reviewMovie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`);
+  ADD CONSTRAINT `fk_reviewClient` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_reviewMovie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `session`
 --
 ALTER TABLE `session`
-  ADD CONSTRAINT `fk_sessionMovie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`);
+  ADD CONSTRAINT `fk_sessionMovie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `ticket`
 --
 ALTER TABLE `ticket`
-  ADD CONSTRAINT `fkTicketSession` FOREIGN KEY (`idSession`) REFERENCES `session` (`idSession`),
-  ADD CONSTRAINT `fk_ticketPrice` FOREIGN KEY (`idPrice`) REFERENCES `price` (`idPrix`);
+  ADD CONSTRAINT `fkTicketSession` FOREIGN KEY (`idSession`) REFERENCES `session` (`idSession`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_ticketClient` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_ticketPrice` FOREIGN KEY (`idPrice`) REFERENCES `price` (`idPrix`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

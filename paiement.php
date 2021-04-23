@@ -39,7 +39,7 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
     <!-- For demo purpose -->
     <div class="row mb-4">
         <div class="col-lg-8 mx-auto text-center">
-            <h1 class="display-6" style="color:white;">Paiement</h1>
+            <h1 class="display-6" style="color:white;"><strong>Paiement</strong></h1>
         </div>
     </div> <!-- End -->
     <div class="row">
@@ -97,14 +97,14 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
                                     </div>
                                 </div>
                                 <div class="card-footer"> <button type="button"
-                                        class="subscribe btn btn-primary btn-block shadow-sm" id="btn_confPay"> Confirmer le paiement
+                                        class="subscribe btn btn-primary btn-block shadow-sm btn_confPay"> Confirmer le paiement
                                     </button>
                             </form>
                         </div>
                     </div> <!-- End -->
                     <!-- Paypal info -->
                     <div id="paypal" class="tab-pane fade pt-3">
-                        <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i>
+                        <p> <button type="button" class="btn btn-primary btn_confPay"><i class="fab fa-paypal mr-2"></i>
                                 Payer avec Paypal</button> </p>
                                 
                     </div> <!-- End -->
@@ -188,7 +188,7 @@ if(empty($_POST['nbAdulte']) && empty($_POST['nbEnfant']) &&  empty($_POST['nbEt
             }
         });
 
-        $('#btn_confPay').on('click', function(){
+        $('.btn_confPay').on('click', function(){
 
             for(var i =0 ; i<3 ; i++){
                 if(quants[i] != ""){
