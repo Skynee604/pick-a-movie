@@ -19,6 +19,11 @@ class Authentication {
         $this->session->set('auth',$user);
     }
 
+    public function connectAdmin($user){
+        $this->session->set('auth', $user);
+        $this->session->set('admin',$user);
+    }
+
     /**
      * restreint l'utilisateur si la session auth n'existe pas
      * @param $url
@@ -112,14 +117,14 @@ class Authentication {
         $admin = null;
         
         $requete = $db->prepare("SELECT Client.* FROM Client INNER JOIN Admin USING(idClient) WHERE emailClient = :mail");
-        $requete->bindParam('email', $mail, PDO::PARAM_STR);
+        $requete->bindParam('mail', $mail);
         $requete->execute();
 
         $admin = $requete->fetchObject();
 
-        if($client != null ){
-            if(password_verify($pwd,$client->pwdClient)){
-                $this->connect($client);
+        if($admin != null ){
+            if(password_verify($pwd,$admin->pwdClient)){
+                $this->connectAdmin($admin);
                 return true;
             }else 
                 return false;
@@ -133,6 +138,7 @@ class Authentication {
      */
     public function logout($url){
        $this->session->delete('auth');
+       $this->session->delete('admin');
        header("Location:$url");
        exit();
     }
