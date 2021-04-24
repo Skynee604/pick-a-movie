@@ -51,7 +51,8 @@ if(empty($_SESSION['auth'])){
                     quant = tickets[i].quant;
                     total =  Number.parseFloat(quant * prix).toFixed(2);
 
-                    contenu = "<div class='card' style='margin-bottom:5%;'>"
+                    contenu = "<a href='/ticket.php?id=" + tickets[i].idTicket + "'>"
+                        + "<div class='card' style='margin-bottom:5%;'>"
                         + "<div class='card-block'>"
                         + "<img class='card-img-top' src='" + image + "'>"
                         + "<h4 class='card-title' style='text-align: center;color:white;'><strong>" + MovieTitle + "</strong></h4>"
