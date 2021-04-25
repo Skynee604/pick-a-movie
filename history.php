@@ -52,19 +52,19 @@ if(empty($_SESSION['auth'])){
                     total =  Number.parseFloat(quant * prix).toFixed(2);
 
                     contenu = "<a href='/ticket.php?id=" + tickets[i].idTicket + "'>"
-                        + "<div class='card' style='margin-bottom:5%;'>"
+                        + "<div class='card h-100'>"
                         + "<div class='card-block'>"
                         + "<img class='card-img-top' src='" + image + "'>"
                         + "<h4 class='card-title' style='text-align: center;color:white;'><strong>" + MovieTitle + "</strong></h4>"
-                        + "<p class='card-text p-y-1' style='text-align: center;color:white;'>"
+                        + "<p class='card-text py-15' style='text-align: center;color:white;margin-bottom:30px;'>"
                         + dateSeance + " - " + heureSeance + "<br>"
                         + namePrix + " (" + prix + "€)"
                         + "</p>"
-                        + "<small style='color:white;'>Quantité : " + quant + " - Total : " + total + "€</small>"
+                        + "<small style='color:white;position:absolute;bottom:0;'>Quantité : " + quant + " - Total : " + total + "€</small>"
                         + "</div>"
                         + "</div>"
 
-                    $("<div class='col-md-4'>" + contenu + "</div>").appendTo('#ticketList');
+                    $("<div class='col-md-4' style='margin-top:3%;'>" + contenu + "</div>").appendTo('#ticketList');
                 }
             }
         });
