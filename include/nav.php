@@ -33,12 +33,12 @@ if (isset($_POST['btnDeco'])) $authentication->logout($_SERVER['HTTP_REFERER']);
         <?php if (empty($_SESSION['auth']->nickNameClient)) : ?>
         <li style="margin-right: 10px;">
             <a href="register.php">
-                <i class="fas fa-user"></i>S'inscrire
+                <i class="fas fa-user"></i>&nbsp;S'inscrire
             </a>
         </li>
         <li>
             <a href="#loginModal" data-toggle="modal" data-target="#loginModal">
-                <i class="fas fa-sign-in-alt"></i>Connexion
+                <i class="fas fa-sign-in-alt"></i>&nbsp;Connexion
             </a>
         </li>
          <?php else : ?>
