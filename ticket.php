@@ -1,8 +1,18 @@
 <?php
+include "include/connectDB.php";
 session_start();
-if(empty($_SESSION['auth']) || !isset($_GET['id']) || empty($_GET['id'])){
+
+$requete=$db->prepare("select idClient from ticket where idTicket = :id");
+
+$requete->bindParam(':id', $_GET['id']);
+$requete->execute();
+$result = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+if(empty($_SESSION['auth']) || !isset($_GET['id']) || empty($_GET['id']) || $_SESSION['auth']->idClient != $result[0]['idClient']){
     header("Location: .");
 }
+
+
 ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

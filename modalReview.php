@@ -35,7 +35,7 @@
           </div>
           <label for="newReview" style="color: white;">Avis :</label>
           <textarea class="form-control" id="newReview" name="newReview" rows="3"
-            placeholder="Écrivez votre avis ..."></textarea>
+            placeholder="Écrivez votre avis ..." style="resize:none;"></textarea>
         </form>
       </div>
       <div class="modal-footer">

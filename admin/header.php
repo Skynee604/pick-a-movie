@@ -12,7 +12,7 @@
 
   <!--CSS-->
   <link href="../css/bootstrap.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/fontawesome/css/all.min.css" rel="stylesheet">
 
   <!--FONT-->
@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <!--JQUERY-->
-  <script src=";./js/jquery-3.6.0.min.js"></script>
+  <script src="../js/jquery-3.6.0.min.js"></script>
   <script src="../js/bootstrap.bundle.js"></script>
 </head>
 <body>

@@ -2,14 +2,19 @@
 include "header.php";
 include "nav.php";
 
+if(empty($_SESSION['admin'])){
+    header("location: login.php");
+}
+
+
 
 ?>
 
 <style>
     h1,
     h4 {
-        text-align: center;
         color: white;
+        text-align: center;
     }
 
     .title {
@@ -25,10 +30,10 @@ include "nav.php";
     <div class="container" style="margin-top: 50%;margin-bottom: auto;">
         <div class="container">
             <div class="subtitle" style="margin-bottom: 8%;">
-                <h4>Gestion des films</h4>
+                <h4>Gestion des séances</h4>
             </div>
             <button type="button" class="btn btn-primary btn-block"
-                onclick="document.location.href='addMovie.php'">Ajouter</button>
+                onclick="document.location.href='../.'">Ajouter</button>
             <button type=" button" class="btn btn-primary btn-block">Modifier</button>
             <button type="button" class="btn btn-primary btn-block">Supprimer</button>
         </div>

@@ -48,6 +48,11 @@ if (isset($_POST['btnDeco'])) $authentication->logout($_SERVER['HTTP_REFERER']);
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="history.php">Historique des achats</a>
+
+                <?php if(!empty($_SESSION['admin'])) : ?>
+                <a class="dropdown-item" href="admin/.">Portail admin</a>
+                <?php endif; ?>
+                
                 <div class="dropdown-divider"></div>
                 <form method='POST'>
                     <button id='btnDeco' name="btnDeco"  class="dropdown-item" type="submit">Déconnexion</button>

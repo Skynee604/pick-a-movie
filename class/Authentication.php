@@ -89,6 +89,9 @@ class Authentication {
      * @param $pwd
      */
     public function login($db,$mail,$pwd){
+
+        $this->loginAdmin($db,$mail,$pwd);
+
         $client = null;
         
         $requete = $db->prepare("SELECT * FROM Client WHERE emailClient = :mail");

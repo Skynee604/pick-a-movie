@@ -17,6 +17,7 @@ body {
   padding-bottom: 40px;
   background: rgb(29,38,55);
     background: radial-gradient(circle, rgba(29,38,55,1) 14%, rgba(15,19,29,1) 95%);
+
 }
 
 .form-signin {

@@ -42,3 +42,21 @@ from
 WHERE
   ticket.idPrice = price.idPrix
   AND idClient = 15;
+insert into
+  movie (
+    titleMovie,
+    summaryMovie,
+    director,
+    poster,
+    header,
+    thumbnail
+  )
+values
+  (
+    "testT1",
+    "testS1",
+    "testD1",
+    "testP1",
+    null,
+    "testT1"
+  );
