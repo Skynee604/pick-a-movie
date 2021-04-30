@@ -29,7 +29,7 @@ include "nav.php";
             </div>
             <button type="button" class="btn btn-primary btn-block" onclick="document.location.href='addMovie.php'">Ajouter</button>
             <button type=" button" class="btn btn-primary btn-block" onclick="document.location.href='modifyMovie.php'">Modifier</button>
-            <button type="button" class="btn btn-primary btn-block">Supprimer</button>
+            <button type="button" class="btn btn-primary btn-block" onclick="document.location.href='deleteMovie.php'">Supprimer</button>
         </div>
     </div>
 
