@@ -33,9 +33,11 @@ if(empty($_SESSION['admin'])){
                 <h4>Gestion des séances</h4>
             </div>
             <button type="button" class="btn btn-primary btn-block"
-                onclick="document.location.href='../.'">Ajouter</button>
-            <button type=" button" class="btn btn-primary btn-block">Modifier</button>
-            <button type="button" class="btn btn-primary btn-block">Supprimer</button>
+            onclick="document.location.href='addSession.php'">Ajouter</button>
+            <button type=" button" class="btn btn-primary btn-block"
+            onclick="document.location.href='modifySession.php'">Modifier</button>
+            <button type="button" class="btn btn-primary btn-block"
+            onclick="document.location.href='deleteSession.php'">Supprimer</button>
         </div>
     </div>
 
