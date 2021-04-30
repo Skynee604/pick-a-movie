@@ -10,7 +10,7 @@ function isAjax() {
 if(isAjax()){
 
     $idClient = $_GET['idClient'];
-    $requete = $db->prepare("select idTicket, movie.thumbnail, movie.titleMovie, date_format(session.dateSession,'%d/%m/%Y') as dateSession, date_format(session.timeSession, '%H:%i') as timeSession, price.namePrix, price.prix, quant from price, ticket inner join session using(idSession) inner join movie using(idMovie) where ticket.idPrice = price.idPrix and idClient = :idClient order by timeSession asc;");
+    $requete = $db->prepare("select idTicket, movie.thumbnail, movie.titleMovie, date_format(session.dateSession,'%d/%m/%Y') as dateSession, date_format(session.timeSession, '%H:%i') as timeSession, price.namePrix, price.prix, quant from price, ticket inner join session using(idSession) inner join movie using(idMovie) where ticket.idPrice = price.idPrix and idClient = :idClient order by session.dateSession asc, session.timeSession asc;");
 
     $requete->bindParam(':idClient', $idClient);
     $requete->execute();

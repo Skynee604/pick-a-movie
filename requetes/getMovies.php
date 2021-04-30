@@ -9,7 +9,7 @@ function isAjax() {
 if(isAjax()){
 
     // Préparation de la requête
-    $requete=$db->prepare("select * from movie order by idMovie desc");
+    $requete=$db->prepare("select * from movie order by rand()");
 
     $requete->execute();
 

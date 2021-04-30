@@ -27,9 +27,8 @@ include "nav.php";
             <div class="subtitle" style="margin-bottom: 8%;">
                 <h4>Gestion des films</h4>
             </div>
-            <button type="button" class="btn btn-primary btn-block"
-                onclick="document.location.href='addMovie.php'">Ajouter</button>
-            <button type=" button" class="btn btn-primary btn-block">Modifier</button>
+            <button type="button" class="btn btn-primary btn-block" onclick="document.location.href='addMovie.php'">Ajouter</button>
+            <button type=" button" class="btn btn-primary btn-block" onclick="document.location.href='modifyMovie.php'">Modifier</button>
             <button type="button" class="btn btn-primary btn-block">Supprimer</button>
         </div>
     </div>
@@ -39,8 +38,8 @@ include "nav.php";
 <?php include "../include/footer.php"; ?>
 
 <script>
-    $(function () {
-        $(document).scroll(function () {
+    $(function() {
+        $(document).scroll(function() {
             var $nav = $(".navbar");
             $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
         });

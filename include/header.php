@@ -1,7 +1,7 @@
 <?php
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <title>Pick a Movie</title>

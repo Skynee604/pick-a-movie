@@ -60,3 +60,7 @@ values
     null,
     "testT1"
   );
+
+
+
+UPDATE movie SET titleMovie = :title, director = :director, summaryMovie = :summary, poster = :poster, thumbnail = :thumbnail, header = :header WHERE idMovie = :idMovie;

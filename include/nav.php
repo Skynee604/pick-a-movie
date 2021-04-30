@@ -24,7 +24,7 @@ if (isset($_POST['btnDeco'])) $authentication->logout($_SERVER['HTTP_REFERER']);
 
 <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
   <a class="navbar-brand" href="."><img src="assets/logo_large.png"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="btn-collapse">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -62,4 +62,11 @@ if (isset($_POST['btnDeco'])) $authentication->logout($_SERVER['HTTP_REFERER']);
       <?php endif ;?>
     </ul>
   </div>
+    <script>
+        $('#btn-collapse').on('click', function () {
+            var $nav = $(".navbar");
+            if ($nav.attr('class') != 'navbar fixed-top navbar-dark bg-dark navbar-expand-lg scrolled')
+                $nav.toggleClass('scrolled');
+        });
+    </script>
 </nav>
