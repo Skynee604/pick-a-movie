@@ -23,12 +23,12 @@ include "nav.php";
         <input type="hidden" id="idMovie" name="idMovie"></input>
         <div class="form-group">
             <label for="newPostTitle">Date du film: </label>
-            <input type="date" name="title" class="form-control" id="dateSession" required="required">
+            <input type="date" name="dateSession" class="form-control" id="dateSession" required="required">
         </div>
 
         <div class="form-group">
             <label for="newPostTitle">Scéance du film: </label>
-            <input type="time" name="title" class="form-control" id="session" required="required">
+            <input type="time" name="timeSession" class="form-control" id="timeSession" required="required">
         </div>
 
         <div class="form-group" style="float: right;">
@@ -80,6 +80,13 @@ include "nav.php";
                 cache: false,
                 contentType: false,
                 processData: false
+            });
+        });
+
+        $(function() {
+            $(document).scroll(function() {
+                var $nav = $(".navbar");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
             });
         });
     });
