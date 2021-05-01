@@ -21,7 +21,7 @@ if (isAjax()) {
         $moviePATH = $requete1->fetchAll();
 
 
-        $ext_autorisees = array('png', 'jpg', 'jpeg','webp');
+        $ext_autorisees = array('png', 'jpg', 'jpeg', 'webp');
         $ext_fichier1 = "";
         $ext_fichier2 = "";
         $ext_fichier3 = "";
@@ -61,46 +61,46 @@ if (isAjax()) {
         }
 
 
-            if($fichier1 != null && $fichier1['size'] <= 8000000 && in_array($ext_fichier1, $ext_autorisees)) {
-                $target1 = "images/miniatures/" . basename($fichier1['name']);
-                $infosImg1 = getimagesize($fichier1['tmp_name']);
-            }
+        if ($fichier1 != null && $fichier1['size'] <= 8000000 && in_array($ext_fichier1, $ext_autorisees)) {
+            $target1 = "images/miniatures/" . basename($fichier1['name']);
+            $infosImg1 = getimagesize($fichier1['tmp_name']);
+        }
 
-            if ($fichier2 != null && $fichier2['size'] <= 8000000 && in_array($ext_fichier2, $ext_autorisees)) {
-                $target2 = "images/posters/" . basename($fichier2['name']);
-                $infosImg2 = getimagesize($fichier2['tmp_name']);
-            }
+        if ($fichier2 != null && $fichier2['size'] <= 8000000 && in_array($ext_fichier2, $ext_autorisees)) {
+            $target2 = "images/posters/" . basename($fichier2['name']);
+            $infosImg2 = getimagesize($fichier2['tmp_name']);
+        }
 
-            if ($fichier1 != null && $fichier3['size'] <= 8000000 && in_array($ext_fichier3, $ext_autorisees)) {
-                $target3 = "images/headers/" . basename($fichier3['name']);
-                $infosImg3 = getimagesize($fichier3['tmp_name']);
-            }
+        if ($fichier1 != null && $fichier3['size'] <= 8000000 && in_array($ext_fichier3, $ext_autorisees)) {
+            $target3 = "images/headers/" . basename($fichier3['name']);
+            $infosImg3 = getimagesize($fichier3['tmp_name']);
+        }
 
 
-            $isImage1ok = true;
-            $isImage2ok = true;
-            $isImage3ok = true;
+        $isImage1ok = true;
+        $isImage2ok = true;
+        $isImage3ok = true;
 
-            if ($infosImg1 != null){
-            if ((($infosImg1[0] == 400) && ($infosImg1[1] == 225)) || (($infosImg1[0] == 341) && ($infosImg1[1] == 192)) ) {
+        if ($infosImg1 != null) {
+            if ((($infosImg1[0] == 400) && ($infosImg1[1] == 225)) || (($infosImg1[0] == 341) && ($infosImg1[1] == 192))) {
                 move_uploaded_file($fichier1['tmp_name'], "../" . $target1);
-            } else  {
+            } else {
                 $error[0] = "Les dimensions de la miniature ne conviennent pas.";
                 $isImage1ok = false;
             }
-            }
-            if (($infosImg2[0] == 900) && ($infosImg2[1] == 400)) {
-                move_uploaded_file($fichier2['tmp_name'], "../" . $target2);
-            } else if ($infosImg2 != null) {
-                $error[1] = "Les dimensions de l'affiche ne conviennent pas.";
-                $isImage2ok = false;
-            }
-            if (($infosImg3[0] == 2000) && ($infosImg3[1] == 500)) {
-                move_uploaded_file($fichier3['tmp_name'], "../" . $target3);
-            } else if ($infosImg3 != null) {
-                $error[2] = "Les dimensions du header ne conviennent pas.";
-                $isImage3ok = false;
-            }
+        }
+        if (($infosImg2[0] == 900) && ($infosImg2[1] == 400)) {
+            move_uploaded_file($fichier2['tmp_name'], "../" . $target2);
+        } else if ($infosImg2 != null) {
+            $error[1] = "Les dimensions de l'affiche ne conviennent pas.";
+            $isImage2ok = false;
+        }
+        if (($infosImg3[0] == 2000) && ($infosImg3[1] == 500)) {
+            move_uploaded_file($fichier3['tmp_name'], "../" . $target3);
+        } else if ($infosImg3 != null) {
+            $error[2] = "Les dimensions du header ne conviennent pas.";
+            $isImage3ok = false;
+        }
 
 
 
@@ -121,7 +121,6 @@ if (isAjax()) {
         $error = utf8_encode(json_encode($error));
         echo $error;
     }
-
 } else {
     header('location: ../.');
 }

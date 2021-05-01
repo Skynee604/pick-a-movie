@@ -19,11 +19,11 @@ include "nav.php";
     <h3 style="color:white;"><strong>Modifier une Scéance</strong></h3>
     <form id="data" method="post" enctype="multipart/form-data">
 
-        <select id="liste" class="browser-default custom-select" style="margin-bottom:2%;">
+        <select id="listMovies" class="browser-default custom-select" style="margin-bottom:2%;">
             <option value="default" selected="">Choisir le film auquel modifier une date</option>
         </select>
 
-        <input type="hidden" id="dateSeance" name="dateSeance"></input>
+        <input type="hidden" id="idMovie" name="idMovie"></input>
 
         <select id="dateSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
             <option selected="">Choisir une date</option>
@@ -35,12 +35,12 @@ include "nav.php";
 
         <div class="form-group">
             <label for="newPostTitle">Nouvelle date du film: </label>
-            <input type="date" name="title" class="form-control" id="title" required="required">
+            <input type="date" name="title" class="form-control" id="dateSession" required="required">
         </div>
 
         <div class="form-group">
             <label for="newPostTitle">Nouvelle scéance du film: </label>
-            <input type="time" name="title" class="form-control" id="title" required="required">
+            <input type="time" name="title" class="form-control" id="hourSession" required="required">
         </div>
 
         <div class="form-group" style="float: right;">
@@ -62,11 +62,10 @@ include "nav.php";
             dataType: "json",
             success: function(movies) {
                 for (var i in movies) {
-                    $("<option value='" + movies[i].idMovie + "'>" + movies[i].titleMovie + "</option>").appendTo('#liste')
+                    $("<option value='" + movies[i].idMovie + "'>" + movies[i].titleMovie + "</option>").appendTo('#listMovies')
                 }
             }
         });
-
 
         $("form#data").submit(function(e) {
             e.preventDefault();
@@ -95,32 +94,39 @@ include "nav.php";
             });
         });
 
-        $.ajax({
-            url: "requetes/selectDate.php",
-            method: "GET",
-            data: {
-                idMovie: idMovie
-            },
-            dataType: "json",
-            success: function(seances) {
-                console.log("test");
-                for (var i in seances) {
-                    if (i > 0) {
-                        if (seances[i].dateSession != seances[i - 1].dateSession) {
-                            $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
+        $("#listMovies").on("change", function() {
+                $("#dateSeance").empty();
+                var idMovie = $("#listMovies").val();
+                $.ajax({
+                    url: "../requetes/getSessions.php",
+                    method: "GET",
+                    data: {
+                        idMovie: idMovie
+                    },
+                    dataType: "json",
+                    success: function(seances) {
+                        console.log("test");
+                        for (var i in seances) {
+
+                            if (i > 0) {
+                                if (seances[i].dateSession != seances[i - 1].dateSession) {
+                                    $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
+                                }
+                            } else {
+                                $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
+                            }
                         }
-                    } else {
-                        $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
+
                     }
-                }
-            }
+                });
         });
 
         $("#dateSeance").on('change', function() {
+            var idMovie = $("#listMovies").val();
             var dateSeance = $("#dateSeance").val();
             $(".added").remove();
             $.ajax({
-                url: "requetes/selectDate.php",
+                url: "../requetes/getSessions.php",
                 method: "GET",
                 data: {
                     idMovie: idMovie

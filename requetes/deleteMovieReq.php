@@ -7,14 +7,13 @@ function isAjax()
 }
 
 if (isAjax()) {
-        $error = null;
-        $idMovie = $_POST['idMovie'];
-        $requete2 = $db->prepare("delete from movie where idMovie = :idMovie;");
-        $requete2->bindParam(":idMovie", $idMovie);
-        $requete2->execute();
-        $error = utf8_encode(json_encode($error));
-        echo $error;
-
+    $error = null;
+    $idMovie = $_POST['idMovie'];
+    $requete = $db->prepare("delete from movie where idMovie = :idMovie;");
+    $requete->bindParam(":idMovie", $idMovie);
+    $requete->execute();
+    $error = utf8_encode(json_encode($error));
+    echo $error;
 } else {
     header('location: ../.');
 }
