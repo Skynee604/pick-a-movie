@@ -178,7 +178,6 @@ include "nav.php";
                     $('#data')[0].reset();
                     alert("le film a bien été modifié");
                 } else {
-                    alert("il y a des erreurs");
                     for (var i in errors) {
                         $("<p class ='error' style='color:red;'>" + errors[i] + "</p>").appendTo("#errors");
                     }

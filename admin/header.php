@@ -5,7 +5,7 @@
 
 <head>
   <title>Pick a Movie</title>
-  <link rel="icon" href="assets/logo_small_icon_only.png" />
+  <link rel="icon" href="../assets/logo_small_icon_only.png" />
   <meta charset='utf-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

@@ -10,12 +10,6 @@ $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_C
 $session = Session::getInstance();
 $authentication = new Authentication($session);
 
-// authentification
-if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
-{
-    $connexion = $authentication->login($db, $_POST['LoginEmail'],$_POST['LoginMDP']);
-}
-
 // déconnexion
 if (isset($_POST['btnDeco'])) $authentication->logout($_SERVER['HTTP_REFERER']);
 

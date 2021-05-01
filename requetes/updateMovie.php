@@ -82,7 +82,7 @@ if (isAjax()) {
             $isImage3ok = true;
 
             if ($infosImg1 != null){
-            if (($infosImg1[0] == 400) && ($infosImg1[1] == 225)) {
+            if ((($infosImg1[0] == 400) && ($infosImg1[1] == 225)) || (($infosImg1[0] == 341) && ($infosImg1[1] == 192)) ) {
                 move_uploaded_file($fichier1['tmp_name'], "../" . $target1);
             } else  {
                 $error[0] = "Les dimensions de la miniature ne conviennent pas.";
