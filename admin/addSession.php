@@ -22,12 +22,12 @@ include "nav.php";
         </select>
         <input type="hidden" id="idMovie" name="idMovie"></input>
         <div class="form-group">
-            <label for="newPostTitle">Date du film: </label>
+            <label for="newPostTitle">Choisir une date: </label>
             <input type="date" name="dateSession" class="form-control" id="dateSession" required="required">
         </div>
 
         <div class="form-group">
-            <label for="newPostTitle">Scéance du film: </label>
+            <label for="newPostTitle">Choisir une séance: </label>
             <input type="time" name="timeSession" class="form-control" id="timeSession" required="required">
         </div>
 
