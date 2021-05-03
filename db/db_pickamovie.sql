@@ -27,7 +27,8 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `admin`
 --
-
+CREATE DATABASE IF NOT EXISTS db_pickamovie;
+USE db_pickamovie;
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `idAdmin` int(11) NOT NULL AUTO_INCREMENT,

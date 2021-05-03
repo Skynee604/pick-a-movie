@@ -82,10 +82,8 @@ include "nav.php";
                     if (errors == null) {
                         $('#data')[0].reset();
                         alert("la séance a bien été modifiée")
-                    } else {
-                        for (var i in errors) {
+                    } else {  
                             $("<p class ='error' style='color:red;'>" + errors[i] + "</p>").appendTo("#errors");
-                        }
                     }
                 },
                 cache: false,
