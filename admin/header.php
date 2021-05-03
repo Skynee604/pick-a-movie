@@ -14,7 +14,6 @@
   <!--CSS-->
   <link href="../css/bootstrap.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
-  <link href="../css/jquery.datetimepicker.css" rel="stylesheet">
   <link href="../css/fontawesome/css/all.min.css" rel="stylesheet">
 
   <!--FONT-->
@@ -24,6 +23,5 @@
   <!--JQUERY-->
   <script src="../js/jquery-3.6.0.min.js"></script>
   <script src="../js/bootstrap.bundle.js"></script>
-  <script src="../js/jquery.datetimepicker.js"></script>
 </head>
 <body>

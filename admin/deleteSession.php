@@ -16,7 +16,7 @@ include "nav.php";
 </style>
 
 <div class="container" style="max-width: 800px;margin-top:10%;">
-    <h3 style="color:white;"><strong>Modifier une Scéance</strong></h3>
+    <h3 style="color:white;"><strong>Supprimer une Scéance</strong></h3>
     <form id="data" method="post" enctype="multipart/form-data">
 
         <select id="listMovies" class="browser-default custom-select" style="margin-bottom:2%;">

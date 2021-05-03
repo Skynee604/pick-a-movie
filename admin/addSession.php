@@ -55,26 +55,28 @@ include "nav.php";
             }
         });
 
+        $('#liste').on("change", function() {
+            $('#idMovie').val($("#liste").val());
+        });
 
         $("form#data").submit(function(e) {
             e.preventDefault();
             $(".error").remove();
             var formData = new FormData(this);
-
             $.ajax({
                 url: "../requetes/postSession.php",
                 type: 'POST',
                 data: formData,
                 dataType: 'json',
                 success: function(errors) {
-
+                    console.log(errors);
                     if (errors == null) {
                         $('#data')[0].reset();
-                        alert("la séance a bien été ajouté")
+                        alert("La séance a bien été ajoutée")
                     } else {
-                        for (var i in errors) {
-                            $("<p class ='error' style='color:red;'>" + errors[i] + "</p>").appendTo("#errors");
-                        }
+
+                        $("<p class ='error' style='color:red;'>" + errors + "</p>").appendTo("#errors");
+
                     }
                 },
                 cache: false,
