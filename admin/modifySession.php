@@ -94,7 +94,8 @@ include "nav.php";
         });
 
         $("#listMovies").on("change", function() {
-                $("#dateSeance").empty();
+                $(".date").remove();
+                $('.added').remove();
                 var idMovie = $("#listMovies").val();
                 $('#idMovie').val($("#listMovies").val());
                 $.ajax({
@@ -110,10 +111,10 @@ include "nav.php";
 
                             if (i > 0) {
                                 if (seances[i].dateSession != seances[i - 1].dateSession) {
-                                    $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
+                                    $("<option class='date' value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
                                 }
                             } else {
-                                $("<option value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
+                                $("<option class='date' value='" + seances[i].dateSession + "'>" + seances[i].dateSession + "</option>").appendTo("#dateSeance");
                             }
                         }
 

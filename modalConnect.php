@@ -15,12 +15,12 @@
                 <form method="POST" id="LoginForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="LoginEmail">Adresse Email</label>
-                        <input type="email" class="form-control" id="LoginEmail" placeholder="" name="LoginEmail">
+                        <input type="email" class="form-control" id="LoginEmail" placeholder="" name="LoginEmail" required="required">
                     </div>
 
                     <div class="form-group">
                         <label for="LoginMDP">Mot de passe</label>
-                        <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP">
+                        <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP" required="required">
                     </div>
 
                     <div id="error"></div>
@@ -44,6 +44,7 @@
         $('form#LoginForm').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
+            $('#error').empty();
 
             $.ajax({
                 url: "requetes/connect.php",
