@@ -25,22 +25,22 @@ include "nav.php";
 
         <input type="hidden" id="idMovie" name="idMovie"></input>
 
-        <select id="dateSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
+        <select name="dateSeance" id="dateSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
             <option selected="">Choisir une date</option>
         </select>
 
-        <select id="heureSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
+        <select name="heureSeance" id="heureSeance" class="browser-default custom-select" style="margin-top:3px;max-width: 200px;">
             <option selected="">Choisir une séance</option>
         </select>
 
         <div class="form-group">
-            <label for="newPostTitle">Nouvelle date du film: </label>
-            <input type="date" name="title" class="form-control" id="dateSession" required="required">
+            <label for="newPostTitle">Nouvelle date: </label>
+            <input type="date" name="dateSession" class="form-control" id="dateSession" required="required">
         </div>
 
         <div class="form-group">
-            <label for="newPostTitle">Nouvelle scéance du film: </label>
-            <input type="time" name="title" class="form-control" id="hourSession" required="required">
+            <label for="newPostTitle">Nouvelle heure: </label>
+            <input type="time" name="hourSession" class="form-control" id="hourSession" required="required">
         </div>
 
         <div class="form-group" style="float: right;">
@@ -56,6 +56,7 @@ include "nav.php";
 
 <script>
     $(document).ready(function() {
+        // add all movies to the <select>
         $.ajax({
             url: "../requetes/getMovies.php",
             method: "GET",
@@ -73,17 +74,17 @@ include "nav.php";
             var formData = new FormData(this);
 
             $.ajax({
-                url: "../requetes/postSession.php",
+                url: "../requetes/modifySessionReq.php",
                 type: 'POST',
                 data: formData,
                 dataType: 'json',
                 success: function(errors) {
-
+                    console.log(errors);
                     if (errors == null) {
                         $('#data')[0].reset();
                         alert("la séance a bien été modifiée")
                     } else {  
-                            $("<p class ='error' style='color:red;'>" + errors[i] + "</p>").appendTo("#errors");
+                            $("<p class ='error' style='color:red;'>" + errors + "</p>").appendTo("#errors");
                     }
                 },
                 cache: false,
@@ -95,6 +96,7 @@ include "nav.php";
         $("#listMovies").on("change", function() {
                 $("#dateSeance").empty();
                 var idMovie = $("#listMovies").val();
+                $('#idMovie').val($("#listMovies").val());
                 $.ajax({
                     url: "../requetes/getSessions.php",
                     method: "GET",

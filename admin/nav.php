@@ -37,7 +37,7 @@ if (isset($_POST['btnDeco'])) $authentication->logout("login.php");
                 <a class="nav-link" href="." style="color:white;" id="film">Gestion des films</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="gestionSeance" style="color:white;" id="seance">Gestion des
+                <a class="nav-link" href="gestionSeance.php" style="color:white;" id="seance">Gestion des
                     séances</a>
             </li>
         </ul>

@@ -24,7 +24,7 @@ if (isAjax()) {
     }
     $error = utf8_encode(json_encode($error));
         echo $error;
-}else {
+} else {
     header('location: ../.');
 }
 ?>

@@ -74,9 +74,7 @@ include "nav.php";
                         $('#data')[0].reset();
                         alert("La séance a bien été ajoutée")
                     } else {
-
                         $("<p class ='error' style='color:red;'>" + errors + "</p>").appendTo("#errors");
-
                     }
                 },
                 cache: false,
