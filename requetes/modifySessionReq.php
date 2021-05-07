@@ -11,17 +11,14 @@ if (isAjax()) {
         $error = null;
         // current infos
         $idMovie = htmlentities($_POST['idMovie']);
-        $currentDate = htmlentities($_POST['dateSeance']);
-
-        $currentDateFormatted = date('Y-d-m', strtotime($currentDate));
-        $currentDate = $currentDateFormatted;
-        
+        $currentDate = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['dateSeance'])) );
         $currentHour = htmlentities($_POST['heureSeance']);
         $currentHour = date('H:i:s', strtotime($currentHour));
         // new infos
         $newDate = htmlentities($_POST['dateSession']);
         $newHour = htmlentities($_POST['hourSession']);
 
+        //$error = $currentDate;
         $rqUpdate = $db->prepare("UPDATE session SET dateSession = :newDate, timeSession = :newHour WHERE (idMovie = :idMovie AND dateSession = :currentDate AND timeSession = :currentHour );");
 
         $rqUpdate->bindParam(":idMovie", $idMovie);
