@@ -71,6 +71,8 @@ include "nav.php";
         $("form#data").submit(function(e) {
             e.preventDefault();
             $(".error").remove();
+            $(".date").remove();
+            $('.added').remove();
             var formData = new FormData(this);
 
             $.ajax({
