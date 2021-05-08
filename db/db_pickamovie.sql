@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 23 avr. 2021 à 22:03
+-- Généré le :  sam. 08 mai 2021 à 14:29
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -21,21 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `db_pickamovie`
 --
+CREATE DATABASE IF NOT EXISTS `db_pickamovie` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `db_pickamovie`;
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `admin`
 --
-CREATE DATABASE IF NOT EXISTS db_pickamovie;
-USE db_pickamovie;
+
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `idAdmin` int(11) NOT NULL AUTO_INCREMENT,
   `idClient` int(11) NOT NULL,
   PRIMARY KEY (`idAdmin`),
   KEY `idClient` (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`idAdmin`, `idClient`) VALUES
+(6, 37);
 
 -- --------------------------------------------------------
 
@@ -53,14 +61,15 @@ CREATE TABLE IF NOT EXISTS `client` (
   `emailClient` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idClient`),
   KEY `idClient` (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`idClient`, `nickNameClient`, `nameClient`, `firstNameClient`, `pwdClient`, `emailClient`) VALUES
-(33, 'Utilisateur1', 'Doe', 'John', '$2y$10$7PP7uRLnkdlsh5r.rZt93Oiv421NRxx8c4jPfimcX.wj/5HuxQ9XO', 'test@email.com');
+(36, 'User', 'Doe', 'John', '$2y$10$bsS1Wm6Tmuxo45JEQT.VBuQ7cyKIKPc20x5kTXFrXdRzetWe02RFK', 'user@email.com'),
+(37, 'Admin', 'Doe', 'John', '$2y$10$QRle2KbCLKozpxi2hcYmlOXZJwK62l5UZLQIDd31xrnEeU7nOHNQO', 'admin@email.com');
 
 -- --------------------------------------------------------
 
@@ -78,26 +87,26 @@ CREATE TABLE IF NOT EXISTS `movie` (
   `header` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `thumbnail` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idMovie`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `movie`
 --
 
 INSERT INTO `movie` (`idMovie`, `titleMovie`, `director`, `summaryMovie`, `poster`, `header`, `thumbnail`) VALUES
-(2, 'Star Wars : l\'empire contre attaque', 'Georges Lucas', 'Les Rebelles sont dispersés après l\'attaque de leur base. Han et Leia sont poursuivis tandis que Luke s\'entraîne avec maître Yoda. Mais quand Luke affronte Vador, il découvre la vérité sur son passé.', 'images/posters/starwars.jpg', 'images/headers/StarWarsHeader.jpg', 'images/miniatures/StarWars.jpg'),
-(3, 'Alien', 'Ridley Scott', 'Réalisé par Ridley Scott, ce classique de la science-fiction raconte l\'histoire de Ripley (Sigourney Weaver) qui enquête sur un appel de détresse provenant d\'une planète lointaine et fait une découverte effroyable.', 'images/posters/alien.jpg', 'images/headers/alienHeader.jpg', 'images/miniatures/Alien.jpg'),
-(4, 'Bob l\'éponge : le film', 'Stephen Hillenburg ', 'A Bikini Bottom, quelqu\'un a volé la couronne du roi Neptune, et le patron de Bob l\'éponge, M. Krabs, figure en tête des suspects. Convaincus de son innocence, Bob et Patrick partent pour Shell City avec l\'intention de le disculper et de restituer sa couronne à Neptune. ', 'images/posters/bobleponge.jpg', 'images/headers/2017_SpongeBob_Collection_Header.webp', 'images/miniatures/BobLeponge.jpg'),
-(5, 'The Darjeeling Limited', 'Wes Anderson', 'Francis, Jack et Peter, trois frères qui ne se sont pas vus depuis la mort de leur père, décident de faire un grand voyage en train à travers l\'Inde pour renouer les liens fraternels. Mais très vite, la \"quête spirituelle\" va dérailler : ils vont se retrouver seuls, perdus au milieu du désert avec onze valises, une imprimante, une machine à plastifier et beaucoup de comptes à régler avec la vie...', 'images/posters/darjeelinglimited.jpg', NULL, 'images/miniatures/DarjeelingLimited.jpg'),
+(2, 'Star Wars : l\'empire contre attaque', 'Georges Lucas', 'Les Rebelles sont dispers&eacute;s apr&egrave;s l\'attaque de leur base. Han et Leia sont poursuivis tandis que Luke s\'entra&icirc;ne avec ma&icirc;tre Yoda. Mais quand Luke affronte Vador, il d&eacute;couvre la v&eacute;rit&eacute; sur son pass&eacute;.', 'images/posters/starwars.jpg', 'images/headers/StarWarsHeader.jpg', 'images/miniatures/StarWars.jpg'),
+(3, 'Alien', 'Ridley Scott', 'R&eacute;alis&eacute; par Ridley Scott, ce classique de la science-fiction raconte l\'histoire de Ripley (Sigourney Weaver) qui enqu&ecirc;te sur un appel de d&eacute;tresse provenant d\'une plan&egrave;te lointaine et fait une d&eacute;couverte effroyable.\r\n', 'images/posters/alien.jpg', 'images/headers/alienHeader.jpg', 'images/miniatures/Alien.jpg'),
+(4, 'Bob l\'&eacute;ponge : le film', 'Stephen Hillenburg ', 'A Bikini Bottom, quelqu\'un a vol&eacute; la couronne du roi Neptune, et le patron de Bob l\'&eacute;ponge, M. Krabs, figure en t&ecirc;te des suspects. Convaincus de son innocence, Bob et Patrick partent pour Shell City avec l\'intention de le disculper et de restituer sa couronne &agrave; Neptune. ', 'images/posters/bobleponge.jpg', 'images/headers/2017_SpongeBob_Collection_Header.webp', 'images/miniatures/BobLeponge.jpg'),
+(5, 'The Darjeeling Limited', 'Wes Anderson', 'Francis, Jack et Peter, trois fr&egrave;res qui ne se sont pas vus depuis la mort de leur p&egrave;re, d&eacute;cident de faire un grand voyage en train &agrave; travers l\'Inde pour renouer les liens fraternels. Mais tr&egrave;s vite, la &quot;qu&ecirc;te spirituelle&quot; va d&eacute;railler : ils vont se retrouver seuls, perdus au milieu du d&eacute;sert avec onze valises, une imprimante, une machine &agrave; plastifier et beaucoup de comptes &agrave; r&eacute;gler avec la vie...', 'images/posters/darjeelinglimited.jpg', NULL, 'images/miniatures/DarjeelingLimited.jpg'),
 (6, 'DeadPool', 'Tim Miller', 'Basé sur l\'antihéros le moins conventionnel de l\'univers Marvel, Deadpool raconte l\'histoire des origines de Wade Wilson, un mercenaire qui traque l\'homme qui a presque anéanti sa vie.', 'images/posters/deadpool.jpg', 'images/headers/deadPoolHeader.jpg', 'images/miniatures/DeadPool.jpg'),
 (7, 'ET, l\'extraterrestre', 'Steven Spielberg', 'Pour devenir l\'ami d\'une créature de l\'espace qui veut rentrer chez elle, il faut de la patience et beaucoup de bonbons.', 'images/posters/E.T.jpg', NULL, 'images/miniatures/ET.jpg'),
-(8, 'India Jones et la dernière croisade', 'Steven Spielberg', 'Accompagné de son père pour sa troisième aventure, Indiana Jones part explorer le berceau de la civilisation dans une nouvelle quête du Graal.', 'images/posters/IndianaJones.jpg', 'images/headers/indianaJonesHeader.jpg', 'images/miniatures/IndianaJones.jpg'),
-(9, 'Iron Man', 'Jon Favreau', 'Survivant d\'une attaque en territoire ennemi, l\'homme d\'affaires Tony Stark fabrique une armure high-tech pour défendre le monde sous le nom de Iron Man.', 'images/posters/ironman.jpg', NULL, 'images/miniatures/IronMan.jpg'),
+(8, 'Indiana Jones et la dernière croisade', 'Steven Spielberg', 'Accompagné de son père pour sa troisième aventure, Indiana Jones part explorer le berceau de la civilisation dans une nouvelle quête du Graal.', 'images/posters/IndianaJones.jpg', 'images/headers/indianaJonesHeader.jpg', 'images/miniatures/IndianaJones.jpg'),
+(9, 'Iron Man', 'Jon Favreau', 'Survivant d\'une attaque en territoire ennemi, l\'homme d\'affaires Tony Stark fabrique une armure high-tech pour d&eacute;fendre le monde sous le nom de Iron Man.', 'images/posters/ironman.jpg', NULL, 'images/miniatures/IronMan.jpg'),
 (10, 'Big Trouble in Little China', 'John Carpenter', 'Un camionneur macho est plongé dans un monde étrange, quand la fiancée de son ami est kidnappée par des forces mystérieuses dans le quartier de Chinatown, à San Francisco.', 'images/posters/jackburton.jpg', 'images/headers/jackBurtonHeader.jpg', 'images/miniatures/JackBurton.jpg'),
-(11, 'Jurassic Park', 'Steven Spielberg', 'À moins que vous ne soyez prêts à lutter pour votre survie, il vaut mieux ne pas toucher à l\'ADN de dinosaure fossilisé.', 'images/posters/jurassicpark.jpg', 'images/headers/jurassicParkHeader.jpg', 'images/miniatures/JurassicPark.jpg'),
+(11, 'Jurassic Park', 'Steven Spielberg', '&Agrave; moins que vous ne soyez pr&ecirc;ts &agrave; lutter pour votre survie, il vaut mieux ne pas toucher &agrave; l\'ADN de dinosaure fossilis&eacute;.', 'images/posters/jurassicpark.jpg', 'images/headers/jurassicParkHeader.jpg', 'images/miniatures/JurassicPark.jpg'),
 (12, 'La vie aquatique', 'Wes Anderson', 'Steve Zissou (Bill Murray) et son équipe traquent le mystérieux requin-jaguar, une créature quasi-mythique qui a tué le coéquipier de Steve pendant le tournage d\'un documentaire.', 'images/posters/lavieaquatique.png', NULL, 'images/miniatures/LaVieAquatique.jpg'),
 (13, 'Scooby-Doo', 'Raja Gosnell', 'La bande de Scooby-Doo se retrouve sur Spooky Island pour comprendre la cause d\'une série d\'incidents paranormaux.', 'images/posters/scoobydoo.jpg', NULL, 'images/miniatures/ScoobyDoo.jpg'),
-(14, 'Soul', 'Pete Docter', 'Les studios Pixar Animation vous propulsent depuis les rues de New York dans des dimensions cosmiques, en quête de réponses à de grandes questions existentielles.', 'images/posters/soul.png', 'images/headers/soulHeader.jpg', 'images/miniatures/Soul.jpg'),
+(14, 'Soul', 'Pete Docter', 'Les studios Pixar Animation vous propulsent depuis les rues de New York dans des dimensions cosmiques, en qu&ecirc;te de r&eacute;ponses &agrave; de grandes questions existentielles.', 'images/posters/soul.png', 'images/headers/soulHeader.jpg', 'images/miniatures/Soul.jpg'),
 (15, 'Spider-Man : far from home', 'Jon Watts', 'M?me les super-héros ont parfois besoin de vacances, mais une nouvelle menace oblige Peter Parker à passer à l\'action lors d\'un voyage scolaire en Europe.', 'images/posters/spiderman.png', NULL, 'images/miniatures/SpiderMan.jpg'),
 (16, 'Toy Story', 'John Lasseter', 'Bienvenue dans un monde épatant où les jouets jouent quand leurs propriétaires ne sont pas là. Rencontrez Woody, Buzz et tous leurs amis dans une aventure remplie d\'humour, de coeur et d\'amitié.', 'images/posters/toystory.jpg', 'images/headers/toyStoryHeader.jpg', 'images/miniatures/ToyStory.jpg');
 
@@ -141,29 +150,7 @@ CREATE TABLE IF NOT EXISTS `review` (
   PRIMARY KEY (`idReview`),
   KEY `fk_reviewMovie` (`idMovie`),
   KEY `fk_reviewClient` (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Déchargement des données de la table `review`
---
-
-INSERT INTO `review` (`idReview`, `textReview`, `dateReview`, `noteReview`, `idClient`, `idMovie`) VALUES
-(47, 'Tr&egrave;s bon film !', '2021-04-23 23:32:37', 4, 33, 2),
-(48, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:33:35', 5, 33, 2),
-(49, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:33:54', 3, 33, 2),
-(50, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta ', '2021-04-23 23:34:30', 1, 33, 3),
-(51, 'J\'ai eu tr&egrave;s peur !!', '2021-04-23 23:35:00', 4, 33, 3),
-(52, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta ', '2021-04-23 23:35:20', 5, 33, 4),
-(53, 'Tr&egrave;s marrant ce film, je recommande !', '2021-04-23 23:36:13', 3, 33, 4),
-(54, 'Un chef-d\'&oelig;uvre d\'humour...', '2021-04-23 23:37:26', 3, 33, 6),
-(55, 'Spielberg &agrave; son meilleur !', '2021-04-23 23:38:07', 2, 33, 8),
-(56, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:39:04', 4, 33, 9),
-(57, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:39:29', 1, 33, 9),
-(58, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:39:36', 4, 33, 9),
-(59, 'Que de myst&egrave;res ...', '2021-04-23 23:40:04', 5, 33, 10),
-(60, 'Un classique, &agrave; n\'en pas douter.', '2021-04-23 23:40:43', 5, 33, 11),
-(61, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2021-04-23 23:40:57', 4, 33, 12),
-(62, 'Le film de mon enfance :)', '2021-04-23 23:41:16', 5, 33, 16);
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -195,7 +182,7 @@ INSERT INTO `session` (`idSession`, `dateSession`, `timeSession`, `idMovie`) VAL
 (14, '2021-06-12', '15:00:00', 2),
 (15, '2021-06-12', '20:00:00', 2),
 (16, '2021-06-12', '22:00:00', 2),
-(20, '2021-05-29', '15:00:00', 3),
+(20, '2021-05-30', '01:00:00', 3),
 (21, '2021-05-29', '20:00:00', 3),
 (22, '2021-05-29', '22:00:00', 3),
 (23, '2021-06-05', '15:00:00', 3),
@@ -225,7 +212,7 @@ INSERT INTO `session` (`idSession`, `dateSession`, `timeSession`, `idMovie`) VAL
 (56, '2021-05-29', '15:00:00', 6),
 (57, '2021-05-29', '20:00:00', 6),
 (58, '2021-05-29', '22:00:00', 6),
-(59, '2021-06-05', '15:00:00', 6),
+(59, '2021-05-29', '18:00:00', 6),
 (60, '2021-06-05', '20:00:00', 6),
 (61, '2021-06-05', '22:00:00', 6),
 (62, '2021-06-12', '15:00:00', 6),
@@ -279,7 +266,7 @@ INSERT INTO `session` (`idSession`, `dateSession`, `timeSession`, `idMovie`) VAL
 (110, '2021-05-29', '15:00:00', 12),
 (111, '2021-05-29', '20:00:00', 12),
 (112, '2021-05-29', '22:00:00', 12),
-(113, '2021-06-05', '15:00:00', 12),
+(113, '2021-06-05', '18:00:00', 12),
 (114, '2021-06-05', '20:00:00', 12),
 (115, '2021-06-05', '22:00:00', 12),
 (116, '2021-06-12', '15:00:00', 12),
@@ -288,19 +275,19 @@ INSERT INTO `session` (`idSession`, `dateSession`, `timeSession`, `idMovie`) VAL
 (119, '2021-05-29', '15:00:00', 13),
 (120, '2021-05-29', '20:00:00', 13),
 (121, '2021-05-29', '22:00:00', 13),
-(122, '2021-06-05', '15:00:00', 13),
+(122, '2021-05-07', '18:52:00', 13),
 (123, '2021-06-05', '20:00:00', 13),
 (124, '2021-06-05', '22:00:00', 13),
-(125, '2021-06-12', '15:00:00', 13),
+(125, '2021-06-12', '18:00:00', 13),
 (126, '2021-06-12', '20:00:00', 13),
 (127, '2021-06-12', '22:00:00', 13),
 (128, '2021-05-29', '15:00:00', 14),
 (129, '2021-05-29', '20:00:00', 14),
 (130, '2021-05-29', '22:00:00', 14),
-(131, '2021-06-05', '15:00:00', 14),
+(131, '2021-06-09', '18:00:00', 14),
 (132, '2021-06-05', '20:00:00', 14),
 (133, '2021-06-05', '22:00:00', 14),
-(134, '2021-06-12', '15:00:00', 14),
+(134, '2021-05-08', '12:00:00', 14),
 (135, '2021-06-12', '20:00:00', 14),
 (136, '2021-06-12', '22:00:00', 14),
 (137, '2021-05-29', '15:00:00', 15),
@@ -330,19 +317,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   KEY `fk_ticketClient` (`idClient`) USING BTREE,
   KEY `fk_ticketPrice` (`idPrice`) USING BTREE,
   KEY `fkTicketSession` (`idSession`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Déchargement des données de la table `ticket`
---
-
-INSERT INTO `ticket` (`idTicket`, `idClient`, `idSession`, `idPrice`, `quant`) VALUES
-(41, 33, 6, 1, 2),
-(42, 33, 20, 1, 1),
-(43, 33, 92, 1, 1),
-(44, 33, 13, 3, 2),
-(45, 33, 117, 1, 1),
-(46, 33, 117, 2, 1);
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Contraintes pour les tables déchargées
