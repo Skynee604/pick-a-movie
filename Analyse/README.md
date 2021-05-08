@@ -1,5 +1,7 @@
 # Pick-a-Movie
 
+**Contributeurs :** Lorenz Ingrande, Cédric Loneux, Valentin Durieux
+
 Ce projet est un site web responsif utilisant l'HTML/CSS, le JQuery et le PHP. La mise en page a été faite grâce un framework
 CSS/Javascript, Bootstrap.
 
